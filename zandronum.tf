@@ -26,7 +26,7 @@ resource "proxmox_lxc" "zandronum" {
 }
 
 output "zandronum_ip" {
-  value = zandronum.network.ip
+  value = proxmox_lxc.zandronum.network[0].ip
 }
 
 output "zandronum_password" {
