@@ -10,8 +10,21 @@ resource "proxmox_lxc" "zandronum" {
   password     = random_password.zandronum_password.result
   unprivileged = true
 
+  cores        = 2
+  memory       = 1024
+  swap         = 1024
+
   rootfs {
     storage = "images"
+    size    = "10G"
+  }
+
+  mountpoint {
+    key     = "0"
+    slot    = 0
+    storage = "/srv/zandronum/wads"
+    volume  = "/srv/zandronum/wads"
+    mp      = "/wads"
     size    = "10G"
   }
 
