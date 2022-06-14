@@ -4,9 +4,10 @@ resource "random_password" "photos_password" {
 }
 
 resource "proxmox_lxc" "photos" {
+  count        = 1
   target_node  = var.target_node 
   hostname     = "photos"
-  ostemplate   = "local:images/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
+  ostemplate   = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password     = random_password.photos_password.result
   unprivileged = true
 
@@ -39,7 +40,7 @@ resource "proxmox_lxc" "photos" {
 }
 
 output "photos_ip" {
-  value = proxmox_lxc.photos.network[0].ip
+  value = one(proxmox_lxc.photos[*].network[0].ip)
 }
 
 output "photos_password" {

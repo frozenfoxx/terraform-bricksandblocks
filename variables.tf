@@ -3,14 +3,14 @@ variable "pm_api_url" {
   description = "URL for Proxmox API"
 }
 
-variable "pm_api_token_id" {
+variable "pm_user" {
   default     = ""
-  description = "Token ID for Proxmox API"
+  description = "User ID for Proxmox API"
 }
 
-variable "pm_api_token_secret" {
+variable "pm_pass" {
   default     = ""
-  description = "Token for Proxmox API"
+  description = "Password for Proxmox API"
 }
 
 variable "target_node" {
