@@ -4,18 +4,18 @@ resource "random_password" "photos_password" {
 }
 
 resource "proxmox_lxc" "photos" {
-  count        = 1
-  target_node  = var.target_node 
-  hostname     = "photos"
-  ostemplate   = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
-  password     = random_password.photos_password.result
-  unprivileged = true
+  count           = 1
+  target_node     = var.target_node 
+  hostname        = "photos"
+  ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
+  password        = random_password.photos_password.result
+  ssh_public_keys = file(var.public_ssh_key)
+  start           = true
+  unprivileged    = true
 
-  ssh_public_keys = chomp(var.public_ssh_key)
-
-  cores        = 2
-  memory       = 1024
-  swap         = 1024
+  cores           = 2
+  memory          = 1024
+  swap            = 1024
 
   rootfs {
     storage = "images"
@@ -43,14 +43,20 @@ resource "proxmox_lxc" "photos" {
   connection {
     type        = "ssh"
     user        = "root"
-    agent       = "false"
-    password    = random_password.photos_password.result
-    private_key = var.private_ssh_key
-    host        = self.ip_address
+    private_key = file(var.private_ssh_key)
+    host        = split("/", one(proxmox_lxc.photos[*].network[0].ip))[0]
   }
 
   provisioner "remote-exec" {
     inline = ["sudo apt update", "sudo apt install python3 -y"]
+  }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -u root -i '${TARGET}' --private-key ${var.private_ssh_key} ${path.module}/ansible/roles/photostructure/tasks/main.yml"
+    environment = {
+      ANSIBLE_HOST_KEY_CHECKING = "false"
+      TARGET = split("/", one(proxmox_lxc.photos[*].network[0].ip))[0]
+    }
   }
 }
 
