@@ -11,6 +11,8 @@ resource "proxmox_lxc" "photos" {
   password     = random_password.photos_password.result
   unprivileged = true
 
+  ssh_public_keys = chomp(var.public_ssh_key)
+
   cores        = 2
   memory       = 1024
   swap         = 1024
@@ -36,6 +38,19 @@ resource "proxmox_lxc" "photos" {
     ip6      = "dhcp"
     gw       = "192.168.2.1"
     firewall = true
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "root"
+    agent       = "false"
+    password    = random_password.photos_password.result
+    private_key = var.private_ssh_key
+    host        = self.ip_address
+  }
+
+  provisioner "remote-exec" {
+    inline = ["sudo apt update", "sudo apt install python3 -y"]
   }
 }
 
