@@ -13,6 +13,16 @@ variable "pm_pass" {
   description = "Password for Proxmox API"
 }
 
+variable "private_ssh_key" {
+  default     = "~/.ssh/id_rsa"
+  description = "SSH Private Key"
+}
+
+variable "public_ssh_key" {
+  default     = "~/.ssh/id_rsa.pub"
+  description = "SSH Public Key Fingerprint"
+}
+
 variable "target_node" {
   default     = "host-1"
   description = "Proxmox cluster node to target for deployment"
