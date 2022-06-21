@@ -26,13 +26,13 @@ resource "proxmox_lxc" "zandronum" {
     storage = "/srv/zandronum/wads"
     volume  = "/srv/zandronum/wads"
     mp      = "/wads"
-    size    = "10G"
+    size    = "0G"
   }
 
   network {
     name     = "eth0"
     bridge   = "vmbr0"
-    ip       = "192.168.2.30"
+    ip       = "192.168.2.30/24"
     ip6      = "dhcp"
     gw       = "192.168.2.1"
     firewall = true

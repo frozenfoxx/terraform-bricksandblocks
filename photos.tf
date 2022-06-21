@@ -26,7 +26,7 @@ resource "proxmox_lxc" "photos" {
     storage = "/srv/photos/Pictures"
     volume  = "/srv/photos/Pictures"
     mp      = "/mnt"
-    size    = "10G"
+    size    = "0G"
   }
 
   network {
