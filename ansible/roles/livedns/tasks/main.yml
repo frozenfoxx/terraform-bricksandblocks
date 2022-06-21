@@ -1,0 +1,12 @@
+---
+- name: Download livedns_ddns_update script
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/frozenfoxx/util/main/network/livedns_ddns_update.sh
+    dest: /root/livedns_ddns_update.sh
+    mode: 0750
+
+- name: Set the cron to run the update script
+  ansible.builtin.cron:
+    name: "update livedns"
+    minute: 0
+    job: "API_KEY=\"{{ lookup('env', 'LIVEDNS_API_KEY') }}\" DOMAIN=\"{{ lookup('env', 'LIVEDNS_DOMAIN') }}\" SUBDOMAIN=\"{{ lookup('env', 'LIVEDNS_SUBDOMAIN') }}\" /root/livedns_ddns_update.sh"
