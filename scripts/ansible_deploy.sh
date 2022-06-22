@@ -11,6 +11,31 @@ TARGET=${TARGET:-""}
 
 # Functions
 
+## Verify we have all required tools
+check_commands()
+{
+  # Check for ansible-playbook
+  if ! command -v ansible-playbook &> /dev/null; then
+    echo "ansible-playbook could not be found!"
+    exit 1
+  fi
+
+  # Check for git
+  if ! command -v git &> /dev/null; then
+    echo "git could not be found!"
+    exit 1
+  fi
+}
+
+## Clean up the Ansible repository
+cleanup_repo()
+{
+  if [[ -d ./ansible ]]; then
+    echo "Cleaning up Ansible repository..."
+    rm -rf ./ansible
+  fi
+}
+
 ## Clone the Ansible repository
 clone_repo()
 {
@@ -24,7 +49,7 @@ run_playbook()
 {
   echo "Running ${PLAYBOOK} against ${TARGET}..."
 
-  ansible-playbook -u root -i ${TARGET} --private-key ${PRIVATE_SSH_KEY} ./ansible/${PLAYBOOK}
+  ansible-playbook -u root -i ${TARGET} --private-key ${PRIVATE_SSH_KEY}, ./ansible/${PLAYBOOK}
 }
 
 ## Display usage
@@ -63,5 +88,7 @@ while [[ "$#" > 1 ]]; do
   shift
 done
 
+check_commands
+cleanup_repo
 clone_repo
 run_playbook
