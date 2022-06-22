@@ -1,3 +1,8 @@
+variable "ansible_repo" {
+  default     = "https://github.com/frozenfoxx/ansible-bricksandblocks.git"
+  description = "Repository containing Ansible playbooks"
+}
+
 variable "pm_api_url" {
   default     = ""
   description = "URL for Proxmox API"

@@ -5,7 +5,7 @@ resource "random_password" "photos_password" {
 
 resource "proxmox_lxc" "photos" {
   count           = 1
-  target_node     = var.target_node 
+  target_node     = var.target_node
   hostname        = "photos"
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password        = random_password.photos_password.result
@@ -52,9 +52,10 @@ resource "proxmox_lxc" "photos" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook -u root -i '${TARGET}' --private-key ${var.private_ssh_key} ${path.module}/ansible/roles/photostructure/tasks/main.yml"
+    command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
-      ANSIBLE_HOST_KEY_CHECKING = "false"
+      PLAYBOOK = "photostructure.yml"
+      PRIVATE_SSH_KEY = var.private_ssh_key
       TARGET = split("/", one(proxmox_lxc.photos[*].network[0].ip))[0]
     }
   }
