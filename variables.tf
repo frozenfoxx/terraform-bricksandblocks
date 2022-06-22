@@ -3,6 +3,21 @@ variable "ansible_repo" {
   description = "Repository containing Ansible playbooks"
 }
 
+variable "livedns_api_key" {
+  default     = ""
+  description = "API key for usage with LiveDNS"
+}
+
+variable "livedns_domain" {
+  default     = "bricksandblocks.net"
+  description = "Domain used for LiveDNS"
+}
+
+variable "livedns_subdomain" {
+  default     = ""
+  description = "Subdomain used for LiveDNS"
+}
+
 variable "pm_api_url" {
   default     = ""
   description = "URL for Proxmox API"

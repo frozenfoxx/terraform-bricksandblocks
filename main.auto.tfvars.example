@@ -1,3 +1,4 @@
+livedns_api_key = "big_huge_key"
 pm_api_url = "https://proxmox:8006/api2/json"
 pm_user = "terraform-prov@pve"
 pm_pass = "big-secret-pass"
