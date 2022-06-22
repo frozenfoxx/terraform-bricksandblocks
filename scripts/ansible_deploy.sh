@@ -49,7 +49,7 @@ run_playbook()
 {
   echo "Running ${PLAYBOOK} against ${TARGET}..."
 
-  ansible-playbook -u root -i ${TARGET} --private-key ${PRIVATE_SSH_KEY}, ./ansible/${PLAYBOOK}
+  ansible-playbook -u root -i ${TARGET}, --private-key ${PRIVATE_SSH_KEY} ./ansible/${PLAYBOOK}
 }
 
 ## Display usage
