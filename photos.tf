@@ -19,7 +19,7 @@ resource "proxmox_lxc" "photos" {
 
   rootfs {
     storage = "images"
-    size    = "10G"
+    size    = "20G"
   }
 
   mountpoint {
