@@ -14,7 +14,7 @@ resource "proxmox_lxc" "photos" {
   unprivileged    = true
 
   cores           = 2
-  memory          = 1024
+  memory          = 4096
   swap            = 1024
 
   rootfs {
