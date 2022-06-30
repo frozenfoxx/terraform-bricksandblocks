@@ -47,3 +47,15 @@ variable "target_node" {
   default     = "host-1"
   description = "Proxmox cluster node to target for deployment"
 }
+
+variable "zandronum_rcon_pass" {
+  default     = ""
+  description = "Password for connecting to a Zandronum server with RCON"
+  sensitive   = true
+}
+
+variable "zandronum_server_pass" {
+  default     = ""
+  description = "Password for connecting to a Zandronum server"
+  sensitive   = true
+}
