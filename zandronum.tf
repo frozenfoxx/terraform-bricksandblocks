@@ -37,6 +37,29 @@ resource "proxmox_lxc" "zandronum" {
     gw       = "192.168.2.1"
     firewall = true
   }
+
+  connection {
+    type        = "ssh"
+    user        = "root"
+    private_key = file(var.private_ssh_key)
+    host        = split("/", one(proxmox_lxc.zandronum[*].network[0].ip))[0]
+  }
+
+  provisioner "remote-exec" {
+    inline = ["sudo apt update", "sudo apt install python3 -y"]
+  }
+
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/ansible_deploy.sh"
+    environment = {
+      LIVEDNS_API_KEY = var.livedns_api_key
+      LIVEDNS_DOMAIN = var.livedns_domain
+      LIVEDNS_SUBDOMAIN = "zandronum"
+      PLAYBOOK = "zandronum.yml"
+      PRIVATE_SSH_KEY = var.private_ssh_key
+      TARGET = split("/", one(proxmox_lxc.zandronum[*].network[0].ip))[0]
+    }
+  }
 }
 
 output "zandronum_ip" {
