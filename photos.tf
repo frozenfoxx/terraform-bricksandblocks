@@ -54,9 +54,6 @@ resource "proxmox_lxc" "photos" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
-      LIVEDNS_API_KEY = var.livedns_api_key
-      LIVEDNS_DOMAIN = var.livedns_domain
-      LIVEDNS_SUBDOMAIN = "photos"
       PLAYBOOK = "photostructure.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
       TARGET = split("/", one(proxmox_lxc.photos[*].network[0].ip))[0]
