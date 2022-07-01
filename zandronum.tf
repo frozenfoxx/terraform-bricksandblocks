@@ -4,16 +4,18 @@ resource "random_password" "zandronum_password" {
 }
 
 resource "proxmox_lxc" "zandronum" {
-  count        = 0
-  target_node  = var.target_node 
-  hostname     = "zandronum"
-  ostemplate   = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
-  password     = random_password.zandronum_password.result
-  unprivileged = true
+  count           = 1
+  target_node     = var.target_node
+  hostname        = "zandronum"
+  ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
+  password        = random_password.zandronum_password.result
+  ssh_public_keys = file(var.public_ssh_key)
+  start           = true
+  unprivileged    = true
 
-  cores        = 2
-  memory       = 1024
-  swap         = 1024
+  cores           = 2
+  memory          = 1024
+  swap            = 1024
 
   rootfs {
     storage = "images"
