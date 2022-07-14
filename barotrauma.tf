@@ -3,7 +3,7 @@ resource "random_password" "barotrauma_password" {
   special = true
 }
 
-resource "proxmox_lxc" "barotrauma_password" {
+resource "proxmox_lxc" "barotrauma" {
   count           = 1
   target_node     = var.target_node
   hostname        = "barotrauma"
@@ -27,7 +27,7 @@ resource "proxmox_lxc" "barotrauma_password" {
     slot    = 0
     storage = "/srv/barotrauma/Multiplayer"
     volume  = "/srv/barotrauma/Multiplayer"
-    mp      = "/home/steam/.local/share/Daedalic\ Entertainment\ GmbH/Barotrauma/Multiplayer"
+    mp      = "/home/btserver/.local/share/Daedalic Entertainment GmbH/Barotrauma/Multiplayer"
     size    = "0G"
   }
 
@@ -36,7 +36,7 @@ resource "proxmox_lxc" "barotrauma_password" {
     slot    = 1
     storage = "/srv/barotrauma/Data"
     volume  = "/srv/barotrauma/Data"
-    mp      = "/home/steam/barotrauma-dedicated/Data"
+    mp      = "/home/btserver/barotrauma-dedicated/Data"
     size    = "0G"
   }
 
