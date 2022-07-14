@@ -27,7 +27,7 @@ resource "proxmox_lxc" "barotrauma" {
     slot    = 0
     storage = "/srv/barotrauma/Multiplayer"
     volume  = "/srv/barotrauma/Multiplayer"
-    mp      = "/home/btserver/.local/share/Daedalic Entertainment GmbH/Barotrauma/Multiplayer"
+    mp      = "/data/Multiplayer"
     size    = "0G"
   }
 
@@ -36,7 +36,7 @@ resource "proxmox_lxc" "barotrauma" {
     slot    = 1
     storage = "/srv/barotrauma/Data"
     volume  = "/srv/barotrauma/Data"
-    mp      = "/home/btserver/barotrauma-dedicated/Data"
+    mp      = "/data/Data"
     size    = "0G"
   }
 
