@@ -31,15 +31,6 @@ resource "proxmox_lxc" "barotrauma" {
     size    = "0G"
   }
 
-  mountpoint {
-    key     = "1"
-    slot    = 1
-    storage = "/srv/barotrauma/Data"
-    volume  = "/srv/barotrauma/Data"
-    mp      = "/data/Data"
-    size    = "0G"
-  }
-
   network {
     name     = "eth0"
     bridge   = "vmbr0"
