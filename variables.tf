@@ -3,6 +3,27 @@ variable "ansible_repo" {
   description = "Repository containing Ansible playbooks"
 }
 
+variable "barotrauma_server_maxplayers" {
+  default     = "16"
+  description = "Maximum number of players to allow on the server"
+}
+
+variable "barotrauma_server_msg" {
+  default     = "Welcome to the Church of Foxx Barotrauma server, let Frozen know if you experience issues."
+  description = "Message of the day for a Barotrauma server"
+}
+
+variable "barotrauma_server_name" {
+  default     = "Church of Foxx"
+  description = "Name of a Barotrauma server"
+}
+
+variable "barotrauma_server_pass" {
+  default     = ""
+  description = "Password for connecting to a Barotrauma server"
+  sensitive   = true
+}
+
 variable "livedns_api_key" {
   default     = ""
   description = "API key for usage with LiveDNS"

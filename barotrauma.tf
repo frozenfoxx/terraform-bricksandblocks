@@ -54,6 +54,10 @@ resource "proxmox_lxc" "barotrauma" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
+      BAROTRAUMA_SERVER_MAXPLAYERS = var.barotrauma_server_maxplayers
+      BAROTRAUMA_SERVER_MSG = var.barotrauma_server_msg
+      BAROTRAUMA_SERVER_NAME = var.barotrauma_server_name
+      BAROTRAUMA_SERVER_PASS = var.barotrauma_server_pass
       LIVEDNS_API_KEY = var.livedns_api_key
       LIVEDNS_DOMAIN = var.livedns_domain
       LIVEDNS_SUBDOMAIN = "barotrauma"
