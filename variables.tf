@@ -24,6 +24,11 @@ variable "barotrauma_server_pass" {
   sensitive   = true
 }
 
+variable "barotrauma_server_public" {
+  default     = "true"
+  description = "Whether the server is publicly listed or not"
+}
+
 variable "livedns_api_key" {
   default     = ""
   description = "API key for usage with LiveDNS"

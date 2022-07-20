@@ -58,6 +58,7 @@ resource "proxmox_lxc" "barotrauma" {
       BAROTRAUMA_SERVER_MSG = var.barotrauma_server_msg
       BAROTRAUMA_SERVER_NAME = var.barotrauma_server_name
       BAROTRAUMA_SERVER_PASS = var.barotrauma_server_pass
+      BAROTRAUMA_SERVER_PUBLIC = var.barotrauma_server_public
       LIVEDNS_API_KEY = var.livedns_api_key
       LIVEDNS_DOMAIN = var.livedns_domain
       LIVEDNS_SUBDOMAIN = "barotrauma"
