@@ -1,3 +1,4 @@
+barotrauma_clientperm = "Username:steam64:Rank AnotherUser:steam64:Rank"
 barotrauma_server_pass = "big-secret-pass"
 livedns_api_key = "big_huge_key"
 pm_api_url = "https://proxmox:8006/api2/json"
