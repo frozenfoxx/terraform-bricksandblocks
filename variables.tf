@@ -3,6 +3,11 @@ variable "ansible_repo" {
   description = "Repository containing Ansible playbooks"
 }
 
+variable "barotrauma_clientperm" {
+  default     = ""
+  description = "Space delimited, colon interior-delimited list of users with Ranks for Barotrauma (ex. \"Frozen:[steam64]:Admin\")"
+}
+
 variable "barotrauma_server_maxplayers" {
   default     = "16"
   description = "Maximum number of players to allow on the server"
