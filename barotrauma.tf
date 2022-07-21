@@ -13,9 +13,8 @@ resource "proxmox_lxc" "barotrauma" {
   start           = true
   unprivileged    = true
 
-  cores           = 2
-  memory          = 2048
-  swap            = 2048
+  cores           = 4
+  memory          = 4096
 
   rootfs {
     storage = "images"
@@ -54,6 +53,7 @@ resource "proxmox_lxc" "barotrauma" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
+      BAROTRAUMA_CLIENTPERM = var.barotrauma_clientperm
       BAROTRAUMA_SERVER_MAXPLAYERS = var.barotrauma_server_maxplayers
       BAROTRAUMA_SERVER_MSG = var.barotrauma_server_msg
       BAROTRAUMA_SERVER_NAME = var.barotrauma_server_name
