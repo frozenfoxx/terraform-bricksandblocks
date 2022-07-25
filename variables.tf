@@ -8,11 +8,6 @@ variable "barotrauma_clientperm" {
   description = "Space delimited, colon interior-delimited list of users with Ranks for Barotrauma (ex. \"Frozen:[steam64]:Admin\")"
 }
 
-variable "barotrauma_server_maxplayers" {
-  default     = "16"
-  description = "Maximum number of players to allow on the server"
-}
-
 variable "barotrauma_server_msg" {
   default     = "Welcome to the Church of Foxx Barotrauma server, let Frozen know if you experience issues."
   description = "Message of the day for a Barotrauma server"
@@ -27,11 +22,6 @@ variable "barotrauma_server_pass" {
   default     = ""
   description = "Password for connecting to a Barotrauma server"
   sensitive   = true
-}
-
-variable "barotrauma_server_public" {
-  default     = "true"
-  description = "Whether the server is publicly listed or not"
 }
 
 variable "livedns_api_key" {

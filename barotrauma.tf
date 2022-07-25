@@ -21,15 +21,6 @@ resource "proxmox_lxc" "barotrauma" {
     size    = "10G"
   }
 
-  mountpoint {
-    key     = "0"
-    slot    = 0
-    storage = "/srv/barotrauma/Multiplayer"
-    volume  = "/srv/barotrauma/Multiplayer"
-    mp      = "/data/Multiplayer"
-    size    = "0G"
-  }
-
   network {
     name     = "eth0"
     bridge   = "vmbr0"
@@ -54,11 +45,9 @@ resource "proxmox_lxc" "barotrauma" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
       BAROTRAUMA_CLIENTPERM = var.barotrauma_clientperm
-      BAROTRAUMA_SERVER_MAXPLAYERS = var.barotrauma_server_maxplayers
       BAROTRAUMA_SERVER_MSG = var.barotrauma_server_msg
       BAROTRAUMA_SERVER_NAME = var.barotrauma_server_name
       BAROTRAUMA_SERVER_PASS = var.barotrauma_server_pass
-      BAROTRAUMA_SERVER_PUBLIC = var.barotrauma_server_public
       LIVEDNS_API_KEY = var.livedns_api_key
       LIVEDNS_DOMAIN = var.livedns_domain
       LIVEDNS_SUBDOMAIN = "barotrauma"
