@@ -13,8 +13,8 @@ resource "proxmox_lxc" "barotrauma" {
   start           = true
   unprivileged    = true
 
-  cores           = 4
-  memory          = 4096
+  cores           = 2
+  memory          = 2048
 
   rootfs {
     storage = "images"
