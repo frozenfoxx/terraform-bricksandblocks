@@ -24,7 +24,7 @@ resource "proxmox_lxc" "barotrauma" {
   network {
     name     = "eth0"
     bridge   = "vmbr0"
-    ip       = "192.168.2.32/24"
+    ip       = "192.168.2.34/24"
     ip6      = "dhcp"
     gw       = "192.168.2.1"
     firewall = true
