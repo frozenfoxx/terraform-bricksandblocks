@@ -34,7 +34,7 @@ resource "proxmox_lxc" "zandronum" {
   network {
     name     = "eth0"
     bridge   = "vmbr0"
-    ip       = "192.168.2.30/24"
+    ip       = "192.168.2.35/24"
     ip6      = "dhcp"
     gw       = "192.168.2.1"
     firewall = true
