@@ -24,9 +24,26 @@ variable "barotrauma_server_pass" {
   sensitive   = true
 }
 
+variable "linodedns_domain" {
+  default     = "bricksandblocks.net"
+  description = "Domain used for Linode DNS"
+}
+
+variable "linodedns_subdomain" {
+  default     = "*"
+  description = "Subdomain used for Linode DNS"
+}
+
+variable "linodedns_token" {
+  default     = ""
+  description = "Token for usage with Linode DNS"
+  sensitive   = true
+}
+
 variable "livedns_api_key" {
   default     = ""
   description = "API key for usage with LiveDNS"
+  sensitive   = true
 }
 
 variable "livedns_domain" {
@@ -35,7 +52,7 @@ variable "livedns_domain" {
 }
 
 variable "livedns_subdomain" {
-  default     = ""
+  default     = "*"
   description = "Subdomain used for LiveDNS"
 }
 
@@ -52,11 +69,13 @@ variable "pm_user" {
 variable "pm_pass" {
   default     = ""
   description = "Password for Proxmox API"
+  sensitive   = true
 }
 
 variable "private_ssh_key" {
   default     = "~/.ssh/id_rsa"
   description = "SSH Private Key"
+  sensitive   = true
 }
 
 variable "public_ssh_key" {
