@@ -34,7 +34,7 @@ resource "proxmox_lxc" "barotrauma" {
     type        = "ssh"
     user        = "root"
     private_key = file(var.private_ssh_key)
-    host        = split("/", one(proxmox_lxc.barotrauma[*].network[0].ip))[0]
+    host        = split("/", self.network[0].ip)[0]
   }
 
   provisioner "remote-exec" {
@@ -48,12 +48,12 @@ resource "proxmox_lxc" "barotrauma" {
       BAROTRAUMA_SERVER_MSG = var.barotrauma_server_msg
       BAROTRAUMA_SERVER_NAME = var.barotrauma_server_name
       BAROTRAUMA_SERVER_PASS = var.barotrauma_server_pass
-      LIVEDNS_API_KEY = var.livedns_api_key
-      LIVEDNS_DOMAIN = var.livedns_domain
-      LIVEDNS_SUBDOMAIN = "barotrauma"
+      LINODEDNS_DOMAIN = var.linodedns_domain
+      LINODEDNS_SUBDOMAIN = "barotrauma"
+      LINODEDNS_TOKEN = var.linodedns_token
       PLAYBOOK = "barotrauma.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
-      TARGET = split("/", one(proxmox_lxc.barotrauma[*].network[0].ip))[0]
+      TARGET = split("/", self.network[0].ip)[0]
     }
   }
 }
