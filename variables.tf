@@ -78,8 +78,19 @@ variable "private_ssh_key" {
   sensitive   = true
 }
 
+variable "private_backup_ssh_key" {
+  default     = "~/.ssh/backup_id_rsa"
+  description = "SSH Private Key"
+  sensitive   = true
+}
+
 variable "public_ssh_key" {
   default     = "~/.ssh/id_rsa.pub"
+  description = "SSH Public Key Fingerprint"
+}
+
+variable "public_backup_ssh_key" {
+  default     = "~/.ssh/backup_id_rsa.pub"
   description = "SSH Public Key Fingerprint"
 }
 
