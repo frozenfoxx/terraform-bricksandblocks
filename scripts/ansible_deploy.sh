@@ -13,6 +13,12 @@ TARGET=${TARGET:-""}
 ## Verify we have all required tools
 check_commands()
 {
+  # Check for ansible-galaxy
+  if ! command -v ansible-galaxy &> /dev/null; then
+    echo "ansible-galaxy could not be found!"
+    exit 1
+  fi
+
   # Check for ansible-playbook
   if ! command -v ansible-playbook &> /dev/null; then
     echo "ansible-playbook could not be found!"
@@ -41,6 +47,14 @@ clone_repo()
   echo "Cloning Ansible repo..."
 
   git clone ${ANSIBLE_REPO} ansible
+}
+
+## Run ansible-galaxy installer
+run_galaxy()
+{
+  echo "Running ansible-galaxy installer..."
+
+  ansible-galaxy install --roles-path ./ansible -r requirements.yml
 }
 
 ## Run a playbook against the target
@@ -90,4 +104,10 @@ done
 check_commands
 cleanup_repo
 clone_repo
+
+# Install roles from Galaxy if available
+if [[ -f ./ansible/requirements.yml ]]; then
+  run_galaxy
+fi
+
 run_playbook
