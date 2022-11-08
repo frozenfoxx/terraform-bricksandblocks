@@ -47,6 +47,7 @@ resource "proxmox_lxc" "revproxy" {
       LINODEDNS_DOMAIN = var.linodedns_domain
       LINODEDNS_SUBDOMAIN = "*"
       LINODEDNS_TOKEN = var.linodedns_token
+      NGINX_RESTART = "False"
       PLAYBOOK = "revproxy.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
       TARGET = split("/", self.network[0].ip)[0]
