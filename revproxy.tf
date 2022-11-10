@@ -45,7 +45,7 @@ resource "proxmox_lxc" "revproxy" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
       LINODEDNS_DOMAIN = var.linodedns_domain
-      LINODEDNS_SUBDOMAINS = "* photos jellyfin"
+      LINODEDNS_SUBDOMAINS = "@ photos jellyfin"
       LINODEDNS_TOKEN = var.linodedns_token
       NGINX_RESTART = "False"
       PLAYBOOK = "revproxy.yml"
