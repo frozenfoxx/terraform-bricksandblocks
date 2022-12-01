@@ -7,6 +7,7 @@ resource "proxmox_lxc" "revproxy" {
   count           = 1
   target_node     = var.target_node
   hostname        = "revproxy"
+  onboot          = true
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password        = random_password.revproxy_password.result
   ssh_public_keys = join("\n", [file(var.public_ssh_key), file(var.public_backup_ssh_key)])

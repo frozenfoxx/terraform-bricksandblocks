@@ -7,6 +7,7 @@ resource "proxmox_lxc" "zandronum" {
   count           = 1
   target_node     = var.target_node
   hostname        = "zandronum"
+  onboot          = true
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password        = random_password.zandronum_password.result
   ssh_public_keys = file(var.public_ssh_key)
