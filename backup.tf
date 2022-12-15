@@ -4,9 +4,9 @@ resource "random_password" "backup_password" {
 }
 
 resource "proxmox_lxc" "backup" {
-  count           = 0
+  count           = 1
   target_node     = var.target_node
-  hostname        = "backup-${count.index}"
+  hostname        = "backup-${sum([count.index,1])}"
   onboot          = true
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password        = random_password.backup_password.result
@@ -36,7 +36,7 @@ resource "proxmox_lxc" "backup" {
     type        = "ssh"
     user        = "root"
     private_key = file(var.private_ssh_key)
-    host        = self.network[0].ip
+    host        = split("/", self.network[0].ip)[0]
   }
 
   provisioner "remote-exec" {
