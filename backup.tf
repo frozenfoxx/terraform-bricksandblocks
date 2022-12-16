@@ -36,7 +36,7 @@ resource "proxmox_lxc" "backup" {
     type        = "ssh"
     user        = "root"
     private_key = file(var.private_ssh_key)
-    host        = split("/", self.network[0].ip)[0]
+    host        = split("/", self.network[0].ip)[count.index]
   }
 
   provisioner "remote-exec" {
@@ -52,7 +52,7 @@ resource "proxmox_lxc" "backup" {
       RCLONE_BACKUP_PRIVATESSHKEY = var.private_backup_ssh_key
       RCLONE_BACKUP_SOURCES = var.rclone_backup_sources
       RCLONE_BACKUP_TARGET = var.rclone_backup_target
-      TARGET = self.network[0].ip
+      TARGET = split("/", self.network[0].ip)[count.index]
     }
   }
 }
