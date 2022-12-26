@@ -1,4 +1,4 @@
-ansible_rclone_configs = "YAML\n  values\n  for\n  ansible_rclone"
+ansible_rclone_config_inventory_type = "someRcloneType"
 barotrauma_clientperm = "Username:steam64:Rank AnotherUser:steam64:Rank"
 barotrauma_server_pass = "big-secret-pass"
 linodedns_token = "big_huge_key"

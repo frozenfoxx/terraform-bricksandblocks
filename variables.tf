@@ -1,7 +1,43 @@
-variable "ansible_rclone_configs" {
+variable "ansible_rclone_config_inventory_access_key_id" {
   default     = ""
   type        = string
-  description = "Config YAML for ansible_rclone"
+  description = "Configuration access key ID if rclone is used for a remotely stored Inventory"
+}
+
+variable "ansible_rclone_config_inventory_acl" {
+  default     = "private"
+  type        = string
+  description = "Configuration ACL if rclone is used for a remotely stored Inventory"
+}
+
+variable "ansible_rclone_config_inventory_endpoint" {
+  default     = ""
+  type        = string
+  description = "Configuration endpoint if rclone is used for a remotely stored Inventory"
+}
+
+variable "ansible_rclone_config_inventory_env_auth" {
+  default     = "true"
+  type        = string
+  description = "Configuration env_auth if rclone is used for a remotely stored Inventory"
+}
+
+variable "ansible_rclone_config_inventory_provider" {
+  default     = ""
+  type        = string
+  description = "Configuration provider if rclone is used for a remotely stored Inventory"
+}
+
+variable "ansible_rclone_config_inventory_secret_access_key" {
+  default     = ""
+  type        = string
+  description = "Configuration secret access key if rclone is used for a remotely stored Inventory"
+}
+
+variable "ansible_rclone_config_inventory_type" {
+  default     = ""
+  type        = string
+  description = "Configuration type if rclone is used for a remotely stored Inventory"
 }
 
 variable "ansible_repo" {
