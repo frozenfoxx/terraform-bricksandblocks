@@ -51,12 +51,9 @@ resource "proxmox_lxc" "backup" {
       RCLONE_BACKUP_PRIVATESSHKEY = var.private_backup_ssh_key
       RCLONE_BACKUP_SOURCES = var.rclone_backup_sources
       RCLONE_BACKUP_TARGET = var.rclone_backup_target
-      RCLONE_CONFIG_INVENTORY_ACCESS_KEY_ID = var.ansible_rclone_config_inventory_access_key_id
-      RCLONE_CONFIG_INVENTORY_ACL = var.ansible_rclone_config_inventory_acl
-      RCLONE_CONFIG_INVENTORY_ENDPOINT = var.ansible_rclone_config_inventory_endpoint
-      RCLONE_CONFIG_INVENTORY_ENV_AUTH = var.ansible_rclone_config_inventory_env_auth
-      RCLONE_CONFIG_INVENTORY_PROVIDER = var.ansible_rclone_config_inventory_provider
-      RCLONE_CONFIG_INVENTORY_SECRET_ACCESS_KEY = var.ansible_rclone_config_inventory_secret_access_key
+      RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
+      RCLONE_CONFIG_INVENTORY_HARD_DELETE = var.ansible_rclone_config_inventory_hard_delete
+      RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
       RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
       TARGET = split("/", self.network[0].ip)[count.index]
     }

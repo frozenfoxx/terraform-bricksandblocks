@@ -2,6 +2,14 @@ variable "ansible_rclone_config_inventory_access_key_id" {
   default     = ""
   type        = string
   description = "Configuration access key ID if rclone is used for a remotely stored Inventory"
+  sensitive   = true
+}
+
+variable "ansible_rclone_config_inventory_account" {
+  default     = ""
+  type        = string
+  description = "Configuration account ID if rclone is used for a remotely stored Inventory"
+  sensitive   = true
 }
 
 variable "ansible_rclone_config_inventory_acl" {
@@ -22,6 +30,19 @@ variable "ansible_rclone_config_inventory_env_auth" {
   description = "Configuration env_auth if rclone is used for a remotely stored Inventory"
 }
 
+variable "ansible_rclone_config_inventory_hard_delete" {
+  default     = "true"
+  type        = string
+  description = "Configuration hard_delete if rclone is used for a remotely stored Inventory"
+}
+
+variable "ansible_rclone_config_inventory_key" {
+  default     = ""
+  type        = string
+  description = "Configuration key if rclone is used for a remotely stored Inventory"
+  sensitive   = true
+}
+
 variable "ansible_rclone_config_inventory_provider" {
   default     = ""
   type        = string
@@ -32,6 +53,7 @@ variable "ansible_rclone_config_inventory_secret_access_key" {
   default     = ""
   type        = string
   description = "Configuration secret access key if rclone is used for a remotely stored Inventory"
+  sensitive   = true
 }
 
 variable "ansible_rclone_config_inventory_type" {
