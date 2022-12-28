@@ -1,3 +1,10 @@
+variable "ansible_inventory_path" {
+  default     = "inventory"
+  type        = string
+  description = "Path for cloning an Ansible Inventory from a remotely stored Inventory"
+  sensitive   = true
+}
+
 variable "ansible_rclone_config_inventory_access_key_id" {
   default     = ""
   type        = string

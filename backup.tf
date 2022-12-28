@@ -46,6 +46,7 @@ resource "proxmox_lxc" "backup" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
+      INVENTORY_PATH = var.ansible_inventory_path
       PLAYBOOK = "backup.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
       RCLONE_BACKUP_PRIVATESSHKEY = var.private_backup_ssh_key
