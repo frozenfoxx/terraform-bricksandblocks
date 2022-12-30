@@ -49,9 +49,6 @@ resource "proxmox_lxc" "backup" {
       INVENTORY_PATH = var.ansible_inventory_path
       PLAYBOOK = "backup.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
-      RCLONE_BACKUP_PRIVATESSHKEY = var.private_backup_ssh_key
-      RCLONE_BACKUP_SOURCES = var.rclone_backup_sources
-      RCLONE_BACKUP_TARGET = var.rclone_backup_target
       RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
       RCLONE_CONFIG_INVENTORY_HARD_DELETE = var.ansible_rclone_config_inventory_hard_delete
       RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
