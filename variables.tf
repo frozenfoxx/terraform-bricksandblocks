@@ -182,18 +182,6 @@ variable "public_backup_ssh_key" {
   description = "SSH Public Key Fingerprint"
 }
 
-variable "rclone_backup_sources" {
-  default     = ""
-  type        = string
-  description = "Colon-separated, space-delimited list of backup sources and types to run (ex. \"someserver-2:barotrauma otherserver-5:library\")"
-}
-
-variable "rclone_backup_target" {
-  default     = ""
-  type        = string
-  description = "Target host for backups"
-}
-
 variable "target_node" {
   default     = "host-1"
   type        = string
