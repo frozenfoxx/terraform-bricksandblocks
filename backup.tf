@@ -47,7 +47,7 @@ resource "proxmox_lxc" "backup" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
       INVENTORY_PATH = var.ansible_inventory_path
-      PLAYBOOK = "backup.yml"
+      PLAYBOOK = "rsync_backup.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
       RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
       RCLONE_CONFIG_INVENTORY_HARD_DELETE = var.ansible_rclone_config_inventory_hard_delete
