@@ -4,7 +4,7 @@ resource "random_password" "backup_password" {
 }
 
 resource "proxmox_lxc" "backup" {
-  count           = 1
+  count           = 0
   target_node     = var.target_node
   hostname        = "backup-${sum([count.index,1])}"
   onboot          = true
