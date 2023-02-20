@@ -1,0 +1,93 @@
+---
+name: Destroy BricksAndBlocks.net
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Whether to apply or plan"
+        required: false
+        default: "apply"
+        type: choice
+        options:
+          - "plan"
+          - "apply"
+
+      terraformLogLevel:
+        description: "Log level for Terraform"
+        required: false
+        default: "ERROR"
+        type: choice
+        options:
+          - "ERROR"
+          - "WARN"
+          - "INFO"
+          - "DEBUG"
+          - "TRACE"
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Deploy keys
+        id: deploy_keys
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.PUBLIC_SSH_KEY }}" > ~/.ssh/id_rsa.pub
+          chmod 644 ~/.ssh/id_rsa.pub
+        shell: bash
+
+      - name: Terraform init
+        id: init
+        run: terraform init
+
+      - name: Terraform plan
+        id: plan
+        run: terraform plan -destroy
+
+  destroy:
+    if: inputs.mode == 'apply'
+    runs-on: ubuntu-latest
+    needs: plan
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Deploy keys
+        id: deploy_keys
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.PUBLIC_SSH_KEY }}" > ~/.ssh/id_rsa.pub
+          chmod 644 ~/.ssh/id_rsa.pub
+        shell: bash
+
+      - name: Terraform init
+        id: init
+        run: terraform init
+
+      - name: Terraform destroy
+        id: destroy
+        run: terraform destroy -auto-approve
+        env:
+          TF_LOG: ${{ inputs.terraformLogLevel }}
