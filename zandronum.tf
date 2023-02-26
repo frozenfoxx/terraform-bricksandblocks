@@ -55,14 +55,9 @@ resource "proxmox_lxc" "zandronum" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
-      LINODEDNS_DOMAIN = var.linodedns_domain
-      LINODEDNS_SUBDOMAIN = "zandronum"
-      LINODEDNS_TOKEN = var.linodedns_token
       PLAYBOOK = "zandronum.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
       TARGET = split("/", self.network[0].ip)[0]
-      ZANDRONUM_RCON_PASS = var.zandronum_rcon_pass
-      ZANDRONUM_SERVER_PASS = var.zandronum_server_pass
     }
   }
 }
