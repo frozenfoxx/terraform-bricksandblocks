@@ -45,6 +45,11 @@ resource "proxmox_lxc" "revproxy" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
+      ANSIBLE_REPO = var.ansible_repo
+      INVENTORY_PATH = var.ansible_inventory_path
+      RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
+      RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
+      RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
       LINODEDNS_DOMAIN = var.linodedns_domain
       LINODEDNS_SUBDOMAINS = "@ photos jellyfin"
       LINODEDNS_TOKEN = var.linodedns_token
