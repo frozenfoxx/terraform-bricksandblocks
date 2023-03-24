@@ -12,8 +12,5 @@ TerraForm code for deploying BricksAndBlocks infrastructure.
 
 # Usage
 
-``` code
-$ rm -rf .terraform
-$ terraform init
-$ bash -c 'terraform [command]'
-```
+- **reinitialize Terraform**: `rm -rf .terraform && terraform init`
+- **redeploy a resource**: `terraform destroy -target=[resource provider].[resource] --auto-approve && terraform apply --auto-approve`
