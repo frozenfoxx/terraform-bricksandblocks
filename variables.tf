@@ -75,31 +75,6 @@ variable "ansible_repo" {
   description = "Repository containing Ansible playbooks"
 }
 
-variable "barotrauma_clientperm" {
-  default     = ""
-  type        = string
-  description = "Space delimited, colon interior-delimited list of users with Ranks for Barotrauma (ex. \"Frozen:[steam64]:Admin\")"
-}
-
-variable "barotrauma_server_msg" {
-  default     = "Welcome to the Church of Foxx Barotrauma server, let Frozen know if you experience issues."
-  type        = string
-  description = "Message of the day for a Barotrauma server"
-}
-
-variable "barotrauma_server_name" {
-  default     = "Church of Foxx"
-  type        = string
-  description = "Name of a Barotrauma server"
-}
-
-variable "barotrauma_server_pass" {
-  default     = ""
-  type        = string
-  description = "Password for connecting to a Barotrauma server"
-  sensitive   = true
-}
-
 variable "linodedns_domain" {
   default     = "bricksandblocks.net"
   type        = string
@@ -186,18 +161,4 @@ variable "target_node" {
   default     = "host-1"
   type        = string
   description = "Proxmox cluster node to target for deployment"
-}
-
-variable "zandronum_rcon_pass" {
-  default     = ""
-  type        = string
-  description = "Password for connecting to a Zandronum server with RCON"
-  sensitive   = true
-}
-
-variable "zandronum_server_pass" {
-  default     = ""
-  type        = string
-  description = "Password for connecting to a Zandronum server"
-  sensitive   = true
 }

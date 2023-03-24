@@ -45,13 +45,6 @@ resource "proxmox_lxc" "barotrauma" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
-      BAROTRAUMA_CLIENTPERM = var.barotrauma_clientperm
-      BAROTRAUMA_SERVER_MSG = var.barotrauma_server_msg
-      BAROTRAUMA_SERVER_NAME = var.barotrauma_server_name
-      BAROTRAUMA_SERVER_PASS = var.barotrauma_server_pass
-      LINODEDNS_DOMAIN = var.linodedns_domain
-      LINODEDNS_SUBDOMAIN = "barotrauma"
-      LINODEDNS_TOKEN = var.linodedns_token
       PLAYBOOK = "barotrauma.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
       TARGET = split("/", self.network[0].ip)[0]
