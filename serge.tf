@@ -14,8 +14,13 @@ resource "proxmox_lxc" "serge" {
   start           = true
   unprivileged    = true
 
-  cores           = 4
+  cores           = 8
   memory          = 32768
+
+  features {
+    fuse    = true
+    nesting = true
+  }
 
   rootfs {
     storage = "images"
