@@ -75,43 +75,6 @@ variable "ansible_repo" {
   description = "Repository containing Ansible playbooks"
 }
 
-variable "linodedns_domain" {
-  default     = "bricksandblocks.net"
-  type        = string
-  description = "Domain used for Linode DNS"
-}
-
-variable "linodedns_subdomain" {
-  default     = "*"
-  type        = string
-  description = "Subdomain used for Linode DNS"
-}
-
-variable "linodedns_token" {
-  default     = ""
-  description = "Token for usage with Linode DNS"
-  sensitive   = true
-}
-
-variable "livedns_api_key" {
-  default     = ""
-  type        = string
-  description = "API key for usage with LiveDNS"
-  sensitive   = true
-}
-
-variable "livedns_domain" {
-  default     = "bricksandblocks.net"
-  type        = string
-  description = "Domain used for LiveDNS"
-}
-
-variable "livedns_subdomain" {
-  default     = "*"
-  type        = string
-  description = "Subdomain used for LiveDNS"
-}
-
 variable "pm_api_url" {
   default     = ""
   type        = string
