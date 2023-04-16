@@ -19,17 +19,8 @@ resource "proxmox_lxc" "zandronum" {
   swap            = 1024
 
   rootfs {
-    storage = "images"
+    storage = "pool"
     size    = "10G"
-  }
-
-  mountpoint {
-    key     = "0"
-    slot    = 0
-    storage = "/srv/zandronum/wads"
-    volume  = "/srv/zandronum/wads"
-    mp      = "/wads"
-    size    = "0G"
   }
 
   network {

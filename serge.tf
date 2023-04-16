@@ -23,7 +23,7 @@ resource "proxmox_lxc" "serge" {
   }
 
   rootfs {
-    storage = "images"
+    storage = "pool"
     size    = "20G"
   }
 

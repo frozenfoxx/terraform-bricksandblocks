@@ -19,35 +19,8 @@ resource "proxmox_lxc" "jellyfin" {
   swap            = 1024
 
   rootfs {
-    storage = "images"
-    size    = "40G"
-  }
-
-  mountpoint {
-    key     = "0"
-    slot    = 0
-    storage = "/srv/jellyfin/Music"
-    volume  = "/srv/jellyfin/Music"
-    mp      = "/mnt/Music"
-    size    = "0G"
-  }
-
-  mountpoint {
-    key     = "1"
-    slot    = 1
-    storage = "/srv/jellyfin/Pictures"
-    volume  = "/srv/jellyfin/Pictures"
-    mp      = "/mnt/Pictures"
-    size    = "0G"
-  }
-
-  mountpoint {
-    key     = "2"
-    slot    = 2
-    storage = "/srv/jellyfin/Videos"
-    volume  = "/srv/jellyfin/Videos"
-    mp      = "/mnt/Videos"
-    size    = "0G"
+    storage = "pool"
+    size    = "20G"
   }
 
   network {

@@ -18,7 +18,7 @@ resource "proxmox_lxc" "revproxy" {
   memory          = 2048
 
   rootfs {
-    storage = "images"
+    storage = "pool"
     size    = "10G"
   }
 
