@@ -62,7 +62,7 @@ output "plex_ip" {
   value = one(proxmox_lxc.plex[*].network[0].ip)
 }
 
-output "jellyfin_password" {
-  value     = random_password.jellyfin_password.result
+output "plex_password" {
+  value     = random_password.plex_password.result
   sensitive = true
 }
