@@ -4,7 +4,7 @@ resource "random_password" "photos_password" {
 }
 
 resource "proxmox_lxc" "photos" {
-  count           = 1
+  count           = 0
   target_node     = var.target_node
   hostname        = "photos"
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"

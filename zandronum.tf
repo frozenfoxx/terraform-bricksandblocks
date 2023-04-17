@@ -4,7 +4,7 @@ resource "random_password" "zandronum_password" {
 }
 
 resource "proxmox_lxc" "zandronum" {
-  count           = 1
+  count           = 0
   target_node     = var.target_node
   hostname        = "zandronum"
   onboot          = true

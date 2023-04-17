@@ -4,7 +4,7 @@ resource "random_password" "barotrauma_password" {
 }
 
 resource "proxmox_lxc" "barotrauma" {
-  count           = 1
+  count           = 0
   target_node     = var.target_node
   hostname        = "barotrauma"
   onboot          = true
