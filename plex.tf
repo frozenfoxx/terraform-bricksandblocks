@@ -4,7 +4,7 @@ resource "random_password" "plex_password" {
 }
 
 resource "proxmox_lxc" "plex" {
-  count           = 1
+  count           = 0
   target_node     = var.target_node
   hostname        = "plex"
   onboot          = true
