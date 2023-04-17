@@ -23,6 +23,24 @@ resource "proxmox_lxc" "jellyfin" {
     size    = "20G"
   }
 
+  mountpoint {
+    key     = "0"
+    slot    = 0
+    storage = "/srv/jellyfin/Music"
+    volume  = "/srv/jellyfin/Music"
+    mp      = "/mnt/Music"
+    size    = "0G"
+  }
+
+  mountpoint {
+    key     = "1"
+    slot    = 0
+    storage = "/srv/jellyfin/Videos"
+    volume  = "/srv/jellyfin/Videos"
+    mp      = "/mnt/Videos"
+    size    = "0G"
+  }
+
   network {
     name     = "eth0"
     bridge   = "vmbr0"

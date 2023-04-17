@@ -23,6 +23,42 @@ resource "proxmox_lxc" "plex" {
     size    = "20G"
   }
 
+  mountpoint {
+    key     = "0"
+    slot    = 0
+    storage = "/srv/plex/Music"
+    volume  = "/srv/plex/Music"
+    mp      = "/mnt/Music"
+    size    = "0G"
+  }
+
+  mountpoint {
+    key     = "1"
+    slot    = 0
+    storage = "/srv/plex/Videos"
+    volume  = "/srv/plex/Videos"
+    mp      = "/mnt/Videos"
+    size    = "0G"
+  }
+
+  mountpoint {
+    key     = "2"
+    slot    = 0
+    storage = "/srv/plex/Pictures-Foxx"
+    volume  = "/srv/plex/Pictures-Foxx"
+    mp      = "/mnt/Pictures-Foxx"
+    size    = "0G"
+  }
+
+  mountpoint {
+    key     = "2"
+    slot    = 0
+    storage = "/srv/plex/Pictures-Princess"
+    volume  = "/srv/plex/Pictures-Princess"
+    mp      = "/mnt/Pictures-Princess"
+    size    = "0G"
+  }
+
   network {
     name     = "eth0"
     bridge   = "vmbr0"

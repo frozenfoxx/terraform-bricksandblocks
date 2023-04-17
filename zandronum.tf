@@ -23,6 +23,15 @@ resource "proxmox_lxc" "zandronum" {
     size    = "10G"
   }
 
+  mountpoint {
+    key     = "0"
+    slot    = 0
+    storage = "/srv/zandronum/wads"
+    volume  = "/srv/zandronum/wads"
+    mp      = "/wads"
+    size    = "0G"
+  }
+
   network {
     name     = "eth0"
     bridge   = "vmbr0"
