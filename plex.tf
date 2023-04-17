@@ -34,7 +34,7 @@ resource "proxmox_lxc" "plex" {
 
   mountpoint {
     key     = "1"
-    slot    = 0
+    slot    = 1
     storage = "/srv/plex/Videos"
     volume  = "/srv/plex/Videos"
     mp      = "/mnt/Videos"
@@ -43,7 +43,7 @@ resource "proxmox_lxc" "plex" {
 
   mountpoint {
     key     = "2"
-    slot    = 0
+    slot    = 2
     storage = "/srv/plex/Pictures-Foxx"
     volume  = "/srv/plex/Pictures-Foxx"
     mp      = "/mnt/Pictures-Foxx"
@@ -51,8 +51,8 @@ resource "proxmox_lxc" "plex" {
   }
 
   mountpoint {
-    key     = "2"
-    slot    = 0
+    key     = "3"
+    slot    = 3
     storage = "/srv/plex/Pictures-Princess"
     volume  = "/srv/plex/Pictures-Princess"
     mp      = "/mnt/Pictures-Princess"

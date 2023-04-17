@@ -34,7 +34,7 @@ resource "proxmox_lxc" "jellyfin" {
 
   mountpoint {
     key     = "1"
-    slot    = 0
+    slot    = 1
     storage = "/srv/jellyfin/Videos"
     volume  = "/srv/jellyfin/Videos"
     mp      = "/mnt/Videos"
