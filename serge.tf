@@ -4,7 +4,7 @@ resource "random_password" "serge_password" {
 }
 
 resource "proxmox_lxc" "serge" {
-  count           = 0
+  count           = 1
   target_node     = var.target_node
   hostname        = "serge"
   onboot          = true

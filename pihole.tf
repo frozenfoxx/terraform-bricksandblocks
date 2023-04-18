@@ -1,16 +1,16 @@
-resource "random_password" "barotrauma_password" {
+resource "random_password" "pihole_password" {
   length  = 16
   special = true
 }
 
-resource "proxmox_lxc" "barotrauma" {
+resource "proxmox_lxc" "pihole" {
   count           = 1
   target_node     = var.target_node
-  hostname        = "barotrauma"
+  hostname        = "pihole"
   onboot          = true
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
-  password        = random_password.barotrauma_password.result
-  ssh_public_keys = file(var.public_ssh_key)
+  password        = random_password.pihole_password.result
+  ssh_public_keys = join("\n", [file(var.public_ssh_key), file(var.public_backup_ssh_key)])
   start           = true
   unprivileged    = true
 
@@ -25,7 +25,7 @@ resource "proxmox_lxc" "barotrauma" {
   network {
     name     = "eth0"
     bridge   = "vmbr0"
-    ip       = "192.168.2.34/24"
+    ip       = "192.168.2.24/24"
     ip6      = "dhcp"
     gw       = "192.168.2.1"
     firewall = true
@@ -50,18 +50,18 @@ resource "proxmox_lxc" "barotrauma" {
       RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
       RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
       RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
-      PLAYBOOK = "barotrauma.yml"
+      PLAYBOOK = "pihole.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
       TARGET = split("/", self.network[0].ip)[0]
     }
   }
 }
 
-output "barotrauma_ip" {
-  value = one(proxmox_lxc.barotrauma[*].network[0].ip)
+output "pihole_ip" {
+  value = one(proxmox_lxc.pihole[*].network[0].ip)
 }
 
-output "barotrauma_password" {
-  value     = random_password.barotrauma_password.result
+output "pihole_password" {
+  value     = random_password.pihole_password.result
   sensitive = true
 }
