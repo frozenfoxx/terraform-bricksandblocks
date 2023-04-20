@@ -96,7 +96,7 @@ run_playbook()
 {
   echo "Running ${PLAYBOOK} against ${TARGET}..."
 
-  ANSIBLE_HOST_KEY_CHECKING=False ANSIBLE_CONFIG=./ansible/ansible.cfg ansible-playbook -u root -i ${TARGET}, --private-key ${PRIVATE_SSH_KEY} ./ansible/${PLAYBOOK}
+  ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root -i ${TARGET}, --private-key ${PRIVATE_SSH_KEY} ./ansible/${PLAYBOOK} -e "ANSIBLE_CONFIG=ansible/ansible.cfg"
 }
 
 ## Display usage
