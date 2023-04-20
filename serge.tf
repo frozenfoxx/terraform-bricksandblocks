@@ -24,7 +24,7 @@ resource "proxmox_lxc" "serge" {
 
   rootfs {
     storage = "pool"
-    size    = "20G"
+    size    = "50G"
   }
 
   network {
