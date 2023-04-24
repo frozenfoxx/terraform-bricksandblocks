@@ -45,6 +45,7 @@ resource "proxmox_lxc" "revproxy" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
+      ANSIBLE_DIR = "ansible-revproxy"
       ANSIBLE_REPO = var.ansible_repo
       INVENTORY_PATH = var.ansible_inventory_path
       RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
