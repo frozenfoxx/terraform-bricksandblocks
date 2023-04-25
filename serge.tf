@@ -3,7 +3,7 @@ resource "random_password" "serge_password" {
   special = true
 }
 
-resource "proxmox_lxc" "serge" {
+resource "proxmox_vm_qemu" "serge" {
   count           = 1
   target_node     = var.target_node
   hostname        = "serge"
@@ -16,11 +16,6 @@ resource "proxmox_lxc" "serge" {
 
   cores           = 8
   memory          = 32768
-
-  features {
-    fuse    = true
-    nesting = true
-  }
 
   rootfs {
     storage = "pool"
@@ -50,6 +45,7 @@ resource "proxmox_lxc" "serge" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
+      ANSIBLE_DIR = "ansible-serge"
       ANSIBLE_REPO = var.ansible_repo
       INVENTORY_PATH = var.ansible_inventory_path
       RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
