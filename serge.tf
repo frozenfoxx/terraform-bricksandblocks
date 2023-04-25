@@ -4,31 +4,34 @@ resource "random_password" "serge_password" {
 }
 
 resource "proxmox_vm_qemu" "serge" {
-  count           = 1
-  target_node     = var.target_node
-  hostname        = "serge"
-  onboot          = true
-  ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
-  password        = random_password.serge_password.result
-  ssh_public_keys = file(var.public_ssh_key)
-  start           = true
-  unprivileged    = true
+  preprovision = true
+  os_type      = "ubuntu"
+  count        = 1
+  target_node  = var.target_node
+  hostname     = "serge"
+  onboot       = true
+  agent        = true
+  password     = random_password.serge_password.result
+  start        = true
 
-  cores           = 8
-  memory          = 32768
+  cores        = 8
+  memory       = 32768
+  iso          = "images:iso/ubuntu-22.04.02-live-server-amd64.iso"
+  ipconfig0    = "ip=192.168.2.38/24,gw=192.168.2.1"
+  sshkeys      = file(var.public_ssh_key)
 
-  rootfs {
-    storage = "pool"
-    size    = "50G"
+  disk {
+    id       = 0
+    iothread = true
+    storage  = "pool"
+    size     = "50G"
+    type     = "scsi"
   }
 
   network {
-    name     = "eth0"
-    bridge   = "vmbr0"
-    ip       = "192.168.2.38/24"
-    ip6      = "dhcp"
-    gw       = "192.168.2.1"
-    firewall = true
+    id     = 0
+    model  = "virtio"
+    bridge = "vmbr0"
   }
 
   connection {
