@@ -12,7 +12,6 @@ resource "proxmox_vm_qemu" "serge" {
   onboot       = true
   agent        = true
   password     = random_password.serge_password.result
-  start        = true
 
   cores        = 8
   memory       = 32768
@@ -22,14 +21,13 @@ resource "proxmox_vm_qemu" "serge" {
 
   disk {
     id       = 0
-    iothread = true
+    iothread = 1
     storage  = "pool"
     size     = "50G"
     type     = "scsi"
   }
 
   network {
-    id     = 0
     model  = "virtio"
     bridge = "vmbr0"
   }
@@ -62,7 +60,7 @@ resource "proxmox_vm_qemu" "serge" {
 }
 
 output "serge_ip" {
-  value = one(proxmox_lxc.serge[*].network[0].ip)
+  value = one(proxmox_vm_qemu.serge[*].network[0].ip)
 }
 
 output "serge_password" {
