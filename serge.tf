@@ -8,10 +8,9 @@ resource "proxmox_vm_qemu" "serge" {
   os_type      = "ubuntu"
   count        = 1
   target_node  = var.target_node
-  hostname     = "serge"
+  name         = "serge"
   onboot       = true
-  agent        = true
-  password     = random_password.serge_password.result
+  agent        = 1
 
   cores        = 8
   memory       = 32768
