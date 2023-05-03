@@ -71,7 +71,7 @@ resource "proxmox_lxc" "jellyfin" {
       RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
       RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
       PLAYBOOK = "jellyfin.yml"
-      PRIVATE_SSH_KEY = var.private_ssh_keys[0]
+      PRIVATE_SSH_KEY = var.private_ssh_key
       TARGET = split("/", one(proxmox_lxc.jellyfin[*].network[0].ip))[0]
     }
   }

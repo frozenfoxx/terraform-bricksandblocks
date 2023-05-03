@@ -19,11 +19,10 @@ resource "proxmox_vm_qemu" "serge" {
   sshkeys      = join("\n", [for key in var.public_ssh_keys : file(key)])
 
   disk {
-    id       = 0
+    type     = "scsi"
     iothread = 1
     storage  = "pool"
     size     = "50G"
-    type     = "scsi"
   }
 
   network {
@@ -35,7 +34,7 @@ resource "proxmox_vm_qemu" "serge" {
     type        = "ssh"
     user        = "root"
     private_key = file(var.private_ssh_key)
-    host        = split("/", self.network[0].ip)[0]
+    host        = split("/", self.network_interfaces[0].ip_address)[0]
   }
 
   provisioner "remote-exec" {
@@ -52,7 +51,7 @@ resource "proxmox_vm_qemu" "serge" {
       RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
       RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
       PLAYBOOK = "serge.yml"
-      PRIVATE_SSH_KEY = var.private_ssh_keys[0]
+      PRIVATE_SSH_KEY = var.private_ssh_key
       TARGET = split("/", self.network_interfaces[0].ip_address)[0]
     }
   }
