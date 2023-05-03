@@ -33,7 +33,7 @@ resource "proxmox_vm_qemu" "serge" {
     type        = "ssh"
     user        = "root"
     private_key = file(var.private_ssh_key)
-    host        = split("/", self.network[0].ip_address)[0]
+    host        = split("/", self.network[0].ipconfig0)[0]
   }
 
   provisioner "remote-exec" {
@@ -51,13 +51,13 @@ resource "proxmox_vm_qemu" "serge" {
       RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
       PLAYBOOK = "serge.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
-      TARGET = split("/", self.network_interfaces[0].ip_address)[0]
+      TARGET = split("/", self.network[0].ipconfig0)[0]
     }
   }
 }
 
 output "serge_ip" {
-  value = proxmox_vm_qemu.serge[*].network_interfaces[0].ip_address
+  value = proxmox_vm_qemu.serge[*].network[0].ipconfig0
 }
 
 output "serge_password" {
