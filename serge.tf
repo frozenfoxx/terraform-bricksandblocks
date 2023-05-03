@@ -4,7 +4,6 @@ resource "random_password" "serge_password" {
 }
 
 resource "proxmox_vm_qemu" "serge" {
-  preprovision = true
   os_type      = "ubuntu"
   count        = 1
   target_node  = var.target_node
@@ -34,7 +33,7 @@ resource "proxmox_vm_qemu" "serge" {
     type        = "ssh"
     user        = "root"
     private_key = file(var.private_ssh_key)
-    host        = split("/", self.network_interfaces[0].ip_address)[0]
+    host        = split("/", self.network[0].ip_address)[0]
   }
 
   provisioner "remote-exec" {
