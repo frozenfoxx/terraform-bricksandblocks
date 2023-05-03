@@ -10,7 +10,7 @@ resource "proxmox_lxc" "dwarffortress" {
   onboot          = true
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password        = random_password.dwarffortress_password.result
-  ssh_public_keys = file(var.public_ssh_key)
+  ssh_public_keys = join("\n", [for key in var.public_ssh_keys : file(key)])
   start           = true
   unprivileged    = true
 
@@ -53,7 +53,7 @@ resource "proxmox_lxc" "dwarffortress" {
       RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
       RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
       PLAYBOOK = "dwarffortress.yml"
-      PRIVATE_SSH_KEY = var.private_ssh_key
+      PRIVATE_SSH_KEY = var.private_ssh_keys[0]
       TARGET = split("/", self.network[0].ip)[0]
     }
   }

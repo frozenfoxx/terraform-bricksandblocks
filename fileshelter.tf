@@ -1,16 +1,16 @@
-resource "random_password" "sftp_password" {
+resource "random_password" "fileshelter_password" {
   length  = 16
   special = true
 }
 
-resource "proxmox_lxc" "sftp" {
+resource "proxmox_lxc" "fileshelter" {
   count           = 1
   target_node     = var.target_node
-  hostname        = "sftp"
+  hostname        = "fileshelter"
   onboot          = true
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
-  password        = random_password.sftp_password.result
-  ssh_public_keys = file(var.public_ssh_key)
+  password        = random_password.fileshelter_password.result
+  ssh_public_keys = join("\n", [for key in var.public_ssh_keys : file(key)])
   start           = true
   unprivileged    = true
 
@@ -45,23 +45,24 @@ resource "proxmox_lxc" "sftp" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
+      ANSIBLE_DIR = "ansible-fileshelter"
       ANSIBLE_REPO = var.ansible_repo
       INVENTORY_PATH = var.ansible_inventory_path
       RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
       RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
       RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
-      PLAYBOOK = "sftp.yml"
-      PRIVATE_SSH_KEY = var.private_ssh_key
+      PLAYBOOK = "fileshelter.yml"
+      PRIVATE_SSH_KEY = var.private_ssh_keys[0]
       TARGET = split("/", self.network[0].ip)[0]
     }
   }
 }
 
-output "sftp_ip" {
-  value = one(proxmox_lxc.sftp[*].network[0].ip)
+output "fileshelter_ip" {
+  value = one(proxmox_lxc.fileshelter[*].network[0].ip)
 }
 
-output "sftp_password" {
-  value     = random_password.sftp_password.result
+output "fileshelter_password" {
+  value     = random_password.fileshelter_password.result
   sensitive = true
 }

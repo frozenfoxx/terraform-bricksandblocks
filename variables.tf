@@ -101,22 +101,9 @@ variable "private_ssh_key" {
   sensitive   = true
 }
 
-variable "private_backup_ssh_key" {
-  default     = "~/.ssh/backup_id_rsa"
-  type        = string
-  description = "SSH Private Key"
-  sensitive   = true
-}
-
-variable "public_ssh_key" {
-  default     = "~/.ssh/id_rsa.pub"
-  type        = string
-  description = "SSH Public Key Fingerprint"
-}
-
-variable "public_backup_ssh_key" {
-  default     = "~/.ssh/backup_id_rsa.pub"
-  type        = string
+variable "public_ssh_keys" {
+  default     = ["~/.ssh/id_rsa.pub", "~/.ssh/backup_id_rsa.pub"]
+  type        = list(string)
   description = "SSH Public Key Fingerprint"
 }
 

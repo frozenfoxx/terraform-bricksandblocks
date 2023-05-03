@@ -10,7 +10,7 @@ resource "proxmox_lxc" "backup" {
   onboot          = true
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password        = random_password.backup_password.result
-  ssh_public_keys = join("\n", [file(var.public_ssh_key), file(var.public_backup_ssh_key)])
+  ssh_public_keys = join("\n", [for key in var.public_ssh_keys : file(key)])
   start           = true
   unprivileged    = true
 
@@ -46,14 +46,15 @@ resource "proxmox_lxc" "backup" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
+      ANSIBLE_DIR = "ansible-backup"
+      ANSIBLE_REPO = var.ansible_repo
       INVENTORY_PATH = var.ansible_inventory_path
-      PLAYBOOK = "rsync_backup.yml"
-      PRIVATE_SSH_KEY = var.private_ssh_key
       RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
-      RCLONE_CONFIG_INVENTORY_HARD_DELETE = var.ansible_rclone_config_inventory_hard_delete
       RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
       RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
-      TARGET = split("/", self.network[0].ip)[count.index]
+      PLAYBOOK = "rsync_backup.yml"
+      PRIVATE_SSH_KEY = var.private_ssh_keys[0]
+      TARGET = split("/", self.network[0].ip)[0]
     }
   }
 }

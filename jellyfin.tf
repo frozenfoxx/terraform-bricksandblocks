@@ -10,7 +10,7 @@ resource "proxmox_lxc" "jellyfin" {
   onboot          = true
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password        = random_password.jellyfin_password.result
-  ssh_public_keys = file(var.public_ssh_key)
+  ssh_public_keys = join("\n", [for key in var.public_ssh_keys : file(key)])
   start           = true
   unprivileged    = true
 
@@ -64,13 +64,14 @@ resource "proxmox_lxc" "jellyfin" {
   provisioner "local-exec" {
     command = "${path.module}/scripts/ansible_deploy.sh"
     environment = {
+      ANSIBLE_DIR = "ansible-jellyfin"
       ANSIBLE_REPO = var.ansible_repo
       INVENTORY_PATH = var.ansible_inventory_path
       RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
       RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
       RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
       PLAYBOOK = "jellyfin.yml"
-      PRIVATE_SSH_KEY = var.private_ssh_key
+      PRIVATE_SSH_KEY = var.private_ssh_keys[0]
       TARGET = split("/", one(proxmox_lxc.jellyfin[*].network[0].ip))[0]
     }
   }
