@@ -9,7 +9,7 @@ resource "proxmox_lxc" "photos" {
   hostname        = "photos"
   ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password        = random_password.photos_password.result
-  ssh_public_keys = join("\n", [for key in var.public_ssh_keys : file(key)])
+  ssh_public_keys = [for key in var.public_ssh_keys : file(key)]
   start           = true
   unprivileged    = true
 
