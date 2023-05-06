@@ -95,14 +95,14 @@ variable "pm_pass" {
 }
 
 variable "private_ssh_key" {
-  default     = "~/.ssh/id_rsa"
+  default     = "~/.ssh/id_ed25519"
   type        = string
   description = "SSH Private Key"
   sensitive   = true
 }
 
 variable "public_ssh_keys" {
-  default     = ["~/.ssh/id_rsa.pub", "~/.ssh/backup_id_rsa.pub"]
+  default     = ["~/.ssh/id_ed25519.pub"]
   type        = list(string)
   description = "SSH Public Key Fingerprint"
 }
