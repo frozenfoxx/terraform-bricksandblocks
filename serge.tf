@@ -15,7 +15,7 @@ resource "proxmox_vm_qemu" "serge" {
   memory       = 32768
   iso          = "images:iso/ubuntu-22.04.02-live-server-amd64.iso"
   ipconfig0    = "ip=192.168.2.38/24,gw=192.168.2.1"
-  sshkeys      = [for key in var.public_ssh_keys : file(key)]
+  sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
     type     = "scsi"
