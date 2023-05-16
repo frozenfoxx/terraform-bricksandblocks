@@ -23,11 +23,16 @@ resource "proxmox_vm_qemu" "serge" {
     size     = "50G"
   }
 
-  network_interface {
+  provisioner "remote-exec" {
+    inline = [
+      "echo 'network:\n  version: 2\n  ethernets:\n    eth0:\n      addresses: [192.168.2.38/24]\n      gateway4: 192.168.2.1\n      nameservers:\n        addresses: [192.168.2.1]' | sudo tee /etc/netplan/01-netcfg.yaml",
+      "sudo netplan apply"
+    ]
+  }
+
+  network {
     bridge   = "vmbr0"
     model    = "virtio"
-    ip       = "192.168.2.38/24"
-    gateway  = "192.168.2.1"
   }
 
   connection {
