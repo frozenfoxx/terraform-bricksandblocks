@@ -14,7 +14,6 @@ resource "proxmox_vm_qemu" "serge" {
   cores        = 8
   memory       = 32768
   iso          = "images:iso/ubuntu-22.04.02-live-server-amd64.iso"
-  ipconfig0    = "ip=192.168.2.38/24,gw=192.168.2.1"
   sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
@@ -24,9 +23,11 @@ resource "proxmox_vm_qemu" "serge" {
     size     = "50G"
   }
 
-  network {
-    model  = "virtio"
-    bridge = "vmbr0"
+  network_interface {
+    bridge   = "vmbr0"
+    model    = "virtio"
+    ip       = "192.168.2.38/24"
+    gateway  = "192.168.2.1"
   }
 
   connection {
