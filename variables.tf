@@ -112,3 +112,9 @@ variable "target_node" {
   type        = string
   description = "Proxmox cluster node to target for deployment"
 }
+
+variable "template" {
+  default     = "ubuntu-2204"
+  type        = string
+  description = "Template to clone from"
+}

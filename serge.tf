@@ -4,17 +4,18 @@ resource "random_password" "serge_password" {
 }
 
 resource "proxmox_vm_qemu" "serge" {
-  os_type      = "ubuntu"
+  os_type      = "cloud-init"
   count        = 1
-  target_node  = var.target_node
+  clone        = var.template
   name         = "serge"
+  target_node  = var.target_node
   onboot       = true
   agent        = 1
 
   cores        = 8
   memory       = 32768
-  iso          = "images:iso/ubuntu-22.04.02-live-server-amd64.iso"
-  sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
+  ipconfig0    = "ip=192.168.2.38/24,gw=192.168.2.1"
+  sshkeys      = [for key in var.public_ssh_keys : file(key)]
 
   disk {
     type     = "scsi"
@@ -23,16 +24,9 @@ resource "proxmox_vm_qemu" "serge" {
     size     = "50G"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "echo 'network:\n  version: 2\n  ethernets:\n    eth0:\n      addresses: [192.168.2.38/24]\n      gateway4: 192.168.2.1\n      nameservers:\n        addresses: [192.168.2.1]' | sudo tee /etc/netplan/01-netcfg.yaml",
-      "sudo netplan apply"
-    ]
-  }
-
   network {
-    bridge   = "vmbr0"
-    model    = "virtio"
+    model  = "virtio"
+    bridge = "vmbr0"
   }
 
   connection {

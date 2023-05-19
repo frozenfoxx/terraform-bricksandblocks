@@ -20,7 +20,7 @@ resource "proxmox_lxc" "plex" {
 
   rootfs {
     storage = "pool"
-    size    = "20G"
+    size    = "50G"
   }
 
   mountpoint {
