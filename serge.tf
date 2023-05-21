@@ -31,7 +31,7 @@ resource "proxmox_vm_qemu" "serge" {
 
   connection {
     type        = "ssh"
-    user        = "root"
+    user        = "ubuntu"
     private_key = file(var.private_ssh_key)
     host        = "192.168.2.38"
   }
