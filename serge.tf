@@ -12,9 +12,6 @@ resource "proxmox_vm_qemu" "serge" {
   onboot       = true
   agent        = 1
 
-  #FIXME Required due to this error: https://github.com/Telmate/terraform-provider-proxmox/issues/460
-  iothread     = 0
-
   cores        = 8
   memory       = 32768
   ipconfig0    = "ip=192.168.2.38/24,gw=192.168.2.1"
@@ -22,7 +19,8 @@ resource "proxmox_vm_qemu" "serge" {
 
   disk {
     type     = "scsi"
-    iothread = 1
+    #FIXME Required due to this error: https://github.com/Telmate/terraform-provider-proxmox/issues/460
+    iothread = 0
     storage  = "pool"
     size     = "50G"
   }
