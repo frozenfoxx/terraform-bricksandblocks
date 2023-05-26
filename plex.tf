@@ -41,24 +41,6 @@ resource "proxmox_lxc" "plex" {
     size    = "0G"
   }
 
-  mountpoint {
-    key     = "2"
-    slot    = 2
-    storage = "/srv/plex/Pictures-Foxx"
-    volume  = "/srv/plex/Pictures-Foxx"
-    mp      = "/mnt/Pictures-Foxx"
-    size    = "0G"
-  }
-
-  mountpoint {
-    key     = "3"
-    slot    = 3
-    storage = "/srv/plex/Pictures-Princess"
-    volume  = "/srv/plex/Pictures-Princess"
-    mp      = "/mnt/Pictures-Princess"
-    size    = "0G"
-  }
-
   network {
     name     = "eth0"
     bridge   = "vmbr0"
