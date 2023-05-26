@@ -4,7 +4,7 @@ resource "random_password" "fileshelter_password" {
 }
 
 resource "proxmox_lxc" "fileshelter" {
-  count           = 1
+  count           = 0
   target_node     = var.target_node
   hostname        = "fileshelter"
   onboot          = true
