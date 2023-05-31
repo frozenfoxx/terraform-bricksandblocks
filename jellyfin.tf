@@ -29,7 +29,7 @@ resource "proxmox_lxc" "jellyfin" {
     storage = "/srv/jellyfin/Music"
     volume  = "/srv/jellyfin/Music"
     mp      = "/mnt/Music"
-    size    = "0G"
+    size    = "0T"
   }
 
   mountpoint {
@@ -38,7 +38,7 @@ resource "proxmox_lxc" "jellyfin" {
     storage = "/srv/jellyfin/Videos"
     volume  = "/srv/jellyfin/Videos"
     mp      = "/mnt/Videos"
-    size    = "0G"
+    size    = "0T"
   }
 
   network {

@@ -29,7 +29,7 @@ resource "proxmox_lxc" "plex" {
     storage = "/srv/plex/Music"
     volume  = "/srv/plex/Music"
     mp      = "/mnt/Music"
-    size    = "0G"
+    size    = "0T"
   }
 
   mountpoint {
@@ -38,7 +38,7 @@ resource "proxmox_lxc" "plex" {
     storage = "/srv/plex/Videos"
     volume  = "/srv/plex/Videos"
     mp      = "/mnt/Videos"
-    size    = "0G"
+    size    = "0T"
   }
 
   network {
