@@ -29,7 +29,7 @@ resource "proxmox_lxc" "zandronum" {
     storage = "/srv/zandronum/wads"
     volume  = "/srv/zandronum/wads"
     mp      = "/wads"
-    size    = "0G"
+    size    = "0T"
   }
 
   network {
