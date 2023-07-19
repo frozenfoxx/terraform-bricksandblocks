@@ -13,8 +13,8 @@ resource "proxmox_vm_qemu" "mealie" {
   agent        = 1
   qemu_os      = "other"
 
-  cores        = 8
-  memory       = 32768
+  cores        = 2
+  memory       = 4096
   ipconfig0    = "ip=192.168.2.23/24,gw=192.168.2.1"
   sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
 
