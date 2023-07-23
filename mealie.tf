@@ -26,7 +26,7 @@ resource "proxmox_vm_qemu" "mealie" {
     #FIXME Required due to this error: https://github.com/Telmate/terraform-provider-proxmox/issues/460
     iothread = 0
     storage  = "pool"
-    size     = "20G"
+    size     = "10G"
   }
 
   network {
