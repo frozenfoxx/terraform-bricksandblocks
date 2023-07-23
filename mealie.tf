@@ -10,7 +10,7 @@ resource "proxmox_vm_qemu" "mealie" {
   name         = "mealie"
   target_node  = var.target_node
   onboot       = true
-  oncreate     = false
+  oncreate     = true
   agent        = 1
   qemu_os      = "other"
 
