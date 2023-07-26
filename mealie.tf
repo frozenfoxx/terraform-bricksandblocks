@@ -10,13 +10,15 @@ resource "proxmox_vm_qemu" "mealie" {
   name         = "mealie"
   target_node  = var.target_node
   onboot       = true
-  oncreate     = true
+  vm_state     = "running"
   agent        = 1
   qemu_os      = "other"
 
   cores        = 2
   memory       = 4096
   bios         = "ovmf"
+  #FIXME Possibly required to fix "already running"
+  #scsihw       = "virtio-scsi-single"
   scsihw       = "virtio-scsi-pci"
   ipconfig0    = "ip=192.168.2.23/24,gw=192.168.2.1"
   sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
