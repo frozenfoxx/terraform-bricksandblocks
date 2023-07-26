@@ -10,14 +10,15 @@ resource "proxmox_vm_qemu" "serge" {
   name         = "serge"
   target_node  = var.target_node
   onboot       = true
-  oncreate     = true
   agent        = 1
   qemu_os      = "other"
 
   cores        = 8
   memory       = 32768
   bios         = "ovmf"
-  scsihw       = "virtio-scsi-pci"
+  #FIXME Possibly required to fix "already running"
+  scsihw       = "virtio-scsi-single"
+  #scsihw       = "virtio-scsi-pci"
   ipconfig0    = "ip=192.168.2.38/24,gw=192.168.2.1"
   sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
 
