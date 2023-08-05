@@ -5,7 +5,7 @@ resource "random_password" "serge_password" {
 
 resource "proxmox_vm_qemu" "serge" {
   os_type      = "cloud-init"
-  count        = 1
+  count        = 0
   clone        = var.template
   name         = "serge"
   target_node  = var.target_node
