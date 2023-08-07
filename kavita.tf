@@ -14,7 +14,7 @@ resource "proxmox_lxc" "kavita" {
   start           = true
   unprivileged    = true
 
-  cores           = 4
+  cores           = 2
   memory          = 4096
   swap            = 1024
 
@@ -26,9 +26,9 @@ resource "proxmox_lxc" "kavita" {
   mountpoint {
     key     = "0"
     slot    = 0
-    storage = "/srv/kavita/Books"
-    volume  = "/srv/kavita/Books"
-    mp      = "/Books"
+    storage = "/srv/kavita/Library"
+    volume  = "/srv/kavita/Library"
+    mp      = "/Library"
     size    = "0T"
   }
 
