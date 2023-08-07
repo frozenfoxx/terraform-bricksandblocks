@@ -15,7 +15,7 @@ resource "proxmox_lxc" "kavita" {
   unprivileged    = true
 
   cores           = 2
-  memory          = 2048
+  memory          = 4096
   swap            = 1024
 
   rootfs {
