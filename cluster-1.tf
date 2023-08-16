@@ -55,6 +55,7 @@ resource "proxmox_vm_qemu" "cluster-1" {
       RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
       PLAYBOOK = "cluster-scheduler.yml"
       PRIVATE_SSH_KEY = var.private_ssh_key
+      SSH_USER = "ubuntu"
       TARGET = "192.168.2.25"
     }
   }
