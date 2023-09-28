@@ -14,7 +14,7 @@ resource "proxmox_vm_qemu" "mealie" {
   qemu_os      = "other"
 
   cores        = 2
-  memory       = 2048
+  memory       = 4096
   bios         = "seabios"
   scsihw       = "virtio-scsi-pci"
   ipconfig0    = "ip=192.168.2.23/24,gw=192.168.2.1"
