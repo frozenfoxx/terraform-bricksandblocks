@@ -8,7 +8,7 @@ resource "proxmox_lxc" "fileshelter" {
   target_node     = var.target_node
   hostname        = "fileshelter"
   onboot          = true
-  ostemplate      = "images:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
+  ostemplate      = "images:vztmpl/ubuntu-23.04-standard_23.04-1_amd64.tar.zst"
   password        = random_password.fileshelter_password.result
   ssh_public_keys = join("", [for key in var.public_ssh_keys : file(key)])
   start           = true
