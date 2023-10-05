@@ -114,7 +114,7 @@ variable "target_node" {
 }
 
 variable "template" {
-  default     = "ubuntu-2204"
+  default     = "ubuntu-2304"
   type        = string
   description = "Template to clone from"
 }
