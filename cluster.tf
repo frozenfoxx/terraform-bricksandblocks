@@ -8,7 +8,7 @@ resource "random_password" "cluster-2_password" {
   special = true
 }
 
-resource "random_password" "cluster-2_password" {
+resource "random_password" "cluster-3_password" {
   length  = 16
   special = true
 }
