@@ -17,6 +17,7 @@ resource "proxmox_vm_qemu" "heimdall" {
   memory       = 4096
   bios         = "seabios"
   scsihw       = "virtio-scsi-pci"
+  hotplug      = "network,disk,usb"
   ipconfig0    = "ip=192.168.2.26/24,gw=192.168.2.1"
   sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
 

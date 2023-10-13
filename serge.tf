@@ -17,6 +17,7 @@ resource "proxmox_vm_qemu" "serge" {
   memory       = 32768
   bios         = "seabios"
   scsihw       = "virtio-scsi-pci"
+  hotplug      = "network,disk,usb"
   ipconfig0    = "ip=192.168.2.38/24,gw=192.168.2.1"
   sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
 
