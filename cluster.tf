@@ -23,7 +23,7 @@ resource "proxmox_vm_qemu" "cluster-1" {
   agent        = 0
   qemu_os      = "other"
 
-  cores        = 2
+  cores        = 4
   memory       = 4096
   bios         = "seabios"
   scsihw       = "virtio-scsi-pci"
@@ -82,7 +82,7 @@ resource "proxmox_vm_qemu" "cluster-2" {
   agent        = 0
   qemu_os      = "other"
 
-  cores        = 2
+  cores        = 4
   memory       = 4096
   bios         = "seabios"
   scsihw       = "virtio-scsi-pci"
