@@ -27,6 +27,7 @@ resource "proxmox_vm_qemu" "cluster-1" {
   memory       = 4096
   bios         = "seabios"
   scsihw       = "virtio-scsi-pci"
+  hotplug      = "network,disk,usb"
   ipconfig0    = "ip=192.168.2.40/24,gw=192.168.2.1"
   sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
 
@@ -85,6 +86,7 @@ resource "proxmox_vm_qemu" "cluster-2" {
   memory       = 4096
   bios         = "seabios"
   scsihw       = "virtio-scsi-pci"
+  hotplug      = "network,disk,usb"
   ipconfig0    = "ip=192.168.2.41/24,gw=192.168.2.1"
   sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
 
@@ -143,6 +145,7 @@ resource "proxmox_vm_qemu" "cluster-3" {
   memory       = 4096
   bios         = "seabios"
   scsihw       = "virtio-scsi-pci"
+  hotplug      = "network,disk,usb"
   ipconfig0    = "ip=192.168.2.42/24,gw=192.168.2.1"
   sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
 
