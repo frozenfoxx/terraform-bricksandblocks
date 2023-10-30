@@ -72,6 +72,8 @@ resource "proxmox_vm_qemu" "cluster-1" {
 }
 
 resource "proxmox_vm_qemu" "cluster-2" {
+  depends_on = [proxmox_vm_qemu.cluster-1]
+
   os_type      = "cloud-init"
   count        = 1
   clone        = var.template
@@ -132,6 +134,8 @@ resource "proxmox_vm_qemu" "cluster-2" {
 }
 
 resource "proxmox_vm_qemu" "cluster-3" {
+  depends_on = [proxmox_vm_qemu.cluster-1]
+
   os_type      = "cloud-init"
   count        = 1
   clone        = var.template
