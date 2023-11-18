@@ -4,11 +4,19 @@ TerraForm code for deploying BricksAndBlocks infrastructure.
 
 # Requirements
 
-* [Terraform Cloud](https://cloud.hashicorp.com/products/terraform) account
-* `terraform login` successfully run
-* Filled out variables in `main.auto.tfvars`
-* Local, activated installation of [Ansible](https://ansible.com)
+* [Terraform Cloud](https://cloud.hashicorp.com/products/terraform)
+* [Ansible](https://ansible.com)
+* [Ansible Galaxy](https://galaxy.ansible.com)
+* [git](http://git-scm.com)
 * [rclone](https://rclone.org)
+
+# Configuration
+
+* Log into Terraform Cloud with `terraform login`
+* Make a copy of `env.dist` called `.env`
+* Fill in appropriate values for `.env`
+* Make a copy of `main.auto.tfvars.example` called `main.auto.tfvars`
+* Fill in appropriate values for `main.auto.tfvars`
 
 # Usage
 
