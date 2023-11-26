@@ -2,6 +2,9 @@
 version: "3"
 
 vars:
+  ANSIBLE_ARGS: ""
+  RCLONE_ARGS: ""
+  TERRAFORM_ARGS: ""
 
 includes:
   ansible: .taskfiles/ansible.tasks.yml
@@ -18,3 +21,23 @@ includes:
   internal: true
 
 tasks:
+  init:
+    desc: "Initialize"
+    cmds:
+      - task: terraform:init
+
+  deploy:
+    desc: "Deploy infrastructure"
+    cmds:
+      - task: terraform:fmt
+      - task: terraform:validate
+      - task: terraform:plan
+      - task: terraform:apply
+
+  destroy:
+    desc: "Destroy infrastructure"
+    cmds:
+      - task: terraform:fmt
+      - task: terraform:validate
+      - task: terraform:plan
+      - task: terraform:destroy
