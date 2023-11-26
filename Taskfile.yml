@@ -5,9 +5,13 @@ vars:
 
 includes:
   ansible: .taskfiles/ansible.tasks.yml
+  dir: ./ansible
   internal: true
 
   git: .taskfiles/git.tasks.yml
+  internal: true
+
+  rclone: .taskfiles/rclone.tasks.yml
   internal: true
 
   terraform: .taskfiles/terraform.tasks.yml
