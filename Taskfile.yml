@@ -1,34 +1,53 @@
 ---
 version: "3"
 
+dotenv: [".env"]
+
 vars:
   ANSIBLE_ARGS: ""
+  ANSIBLE_CONFIG: "{{.USER_WORKING_DIR}}/ansible/ansible.cfg"
   RCLONE_ARGS: ""
   TERRAFORM_ARGS: ""
 
 includes:
   ansible: .taskfiles/ansible.tasks.yml
-  dir: ./ansible
-  internal: true
+    dir: ansible
+    internal: true
 
   git: .taskfiles/git.tasks.yml
-  internal: true
+    internal: true
 
   rclone: .taskfiles/rclone.tasks.yml
-  internal: true
+    internal: true
 
   terraform: .taskfiles/terraform.tasks.yml
-  internal: true
+    vars:
+      TERRAFORM_ARGS: -var="repo_dir={{.USER_WORKING_DIR}}"
+    internal: true
 
 tasks:
+  default:
+  cmds:
+    - task -l
+  silent: true
+
   init:
     desc: "Initialize"
     cmds:
       - task: terraform:init
 
+  plan:
+    desc: "Plan infrastructure"
+    cmds:
+      - task: terraform:init
+      - task: terraform:fmt
+      - task: terraform:validate
+      - task: terraform:plan
+
   deploy:
     desc: "Deploy infrastructure"
     cmds:
+      - task: terraform:init
       - task: terraform:fmt
       - task: terraform:validate
       - task: terraform:plan
@@ -37,6 +56,7 @@ tasks:
   destroy:
     desc: "Destroy infrastructure"
     cmds:
+      - task: terraform:init
       - task: terraform:fmt
       - task: terraform:validate
       - task: terraform:plan
