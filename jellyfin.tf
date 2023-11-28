@@ -13,6 +13,7 @@ resource "proxmox_lxc" "jellyfin" {
   ssh_public_keys = join("", [for key in var.public_ssh_keys : file(key)])
   start           = true
   unprivileged    = true
+  tags            = "jellyfin"
 
   cores           = 2
   memory          = 2048

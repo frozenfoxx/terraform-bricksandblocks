@@ -13,6 +13,7 @@ resource "proxmox_lxc" "kavita" {
   ssh_public_keys = join("", [for key in var.public_ssh_keys : file(key)])
   start           = true
   unprivileged    = true
+  tags            = "kavita"
 
   cores           = 2
   memory          = 4096

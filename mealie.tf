@@ -12,6 +12,7 @@ resource "proxmox_vm_qemu" "mealie" {
   onboot       = true
   agent        = 0
   qemu_os      = "other"
+  tags         = "mealie"
 
   cores        = 2
   memory       = 4096

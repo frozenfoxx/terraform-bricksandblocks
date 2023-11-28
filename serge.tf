@@ -12,6 +12,7 @@ resource "proxmox_vm_qemu" "serge" {
   onboot       = true
   agent        = 0
   qemu_os      = "other"
+  tags         = "serge"
 
   cores        = 8
   memory       = 32768

@@ -4,7 +4,7 @@ resource "random_password" "pihole_password" {
 }
 
 resource "proxmox_lxc" "pihole" {
-  count           = 1
+  count           = 0
   target_node     = var.target_node
   hostname        = "pihole"
   onboot          = true
@@ -13,6 +13,7 @@ resource "proxmox_lxc" "pihole" {
   ssh_public_keys = join("", [for key in var.public_ssh_keys : file(key)])
   start           = true
   unprivileged    = true
+  tags            = "pihole"
 
   cores           = 2
   memory          = 2048

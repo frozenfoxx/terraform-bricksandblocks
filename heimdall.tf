@@ -12,6 +12,7 @@ resource "proxmox_vm_qemu" "heimdall" {
   onboot       = true
   agent        = 0
   qemu_os      = "other"
+  tags         = "heimdall"
 
   cores        = 2
   memory       = 4096

@@ -13,6 +13,7 @@ resource "proxmox_lxc" "revproxy" {
   ssh_public_keys = join("", [for key in var.public_ssh_keys : file(key)])
   start           = true
   unprivileged    = true
+  tags            = "revproxy"
 
   cores           = 2
   memory          = 2048

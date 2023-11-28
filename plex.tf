@@ -13,6 +13,7 @@ resource "proxmox_lxc" "plex" {
   ssh_public_keys = join("", [for key in var.public_ssh_keys : file(key)])
   start           = true
   unprivileged    = true
+  tags            = "plex"
 
   cores           = 4
   memory          = 2048
