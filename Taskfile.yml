@@ -10,26 +10,30 @@ vars:
   TERRAFORM_ARGS: ""
 
 includes:
-  ansible: .taskfiles/ansible.tasks.yml
+  ansible:
+    taskfile: .taskfiles/ansible.tasks.yml
     dir: ansible
     internal: true
 
-  git: .taskfiles/git.tasks.yml
+  git:
+    taskfile:  .taskfiles/git.tasks.yml
     internal: true
 
-  rclone: .taskfiles/rclone.tasks.yml
+  rclone:
+    taskfile: .taskfiles/rclone.tasks.yml
     internal: true
 
-  terraform: .taskfiles/terraform.tasks.yml
+  terraform:
+    taskfile: .taskfiles/terraform.tasks.yml
     vars:
       TERRAFORM_ARGS: -var="repo_dir={{.USER_WORKING_DIR}}"
     internal: true
 
 tasks:
   default:
-  cmds:
-    - task -l
-  silent: true
+    cmds:
+      - task -l
+    silent: true
 
   init:
     desc: "Initialize"
