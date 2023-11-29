@@ -75,14 +75,20 @@ variable "ansible_repo" {
   description = "Repository containing Ansible playbooks"
 }
 
+variable "pm_url" {
+  default     = "https://proxmox:8006"
+  type        = string
+  description = "URL for Proxmox"
+}
+
 variable "pm_api_url" {
-  default     = ""
+  default     = "https://proxmox:8006/api/json"
   type        = string
   description = "URL for Proxmox API"
 }
 
 variable "pm_user" {
-  default     = ""
+  default     = "terraform@pve"
   type        = string
   description = "User ID for Proxmox API"
 }
