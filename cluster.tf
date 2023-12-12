@@ -22,7 +22,7 @@ resource "proxmox_vm_qemu" "cluster-1" {
   onboot       = true
   agent        = 0
   qemu_os      = "other"
-  tags         = "cluster_scheduler"
+  tags         = "rke2_schedulers"
 
   cores        = 4
   memory       = 4096
@@ -83,7 +83,7 @@ resource "proxmox_vm_qemu" "cluster-2" {
   onboot       = true
   agent        = 0
   qemu_os      = "other"
-  tags         = "cluster_worker"
+  tags         = "rke2_workers"
 
   cores        = 4
   memory       = 4096
@@ -146,7 +146,7 @@ resource "proxmox_vm_qemu" "cluster-3" {
   onboot       = true
   agent        = 0
   qemu_os      = "other"
-  tags         = "cluster_worker"
+  tags         = "rke2_workers"
 
   cores        = 4
   memory       = 4096

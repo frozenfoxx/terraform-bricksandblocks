@@ -35,10 +35,24 @@ tasks:
       - task -l
     silent: true
 
-  init:
-    desc: "Initialize"
+  setup:
+    desc: "Set up repository for use"
     cmds:
+      - task: rclone:install
       - task: terraform:init
+      - rm -rf ./ansible
+      - git clone https://github.com/frozenfoxx/ansible-bricksandblocks.git ansible
+      - task: git:reset:dir
+        vars:
+          CLI_ARGS: "./inventory"
+        directory: "{{.USER_WORKING_DIR}}/ansible"
+      - task: rclone:copy
+        vars:
+          RCLONE_SOURCE: "inventory:{{.INVENTORY_PATH}}/"
+          RCLONE_DEST: "."
+        directory: "{{.USER_WORKING_DIR}}/ansible"
+      - task: ansible:galaxy
+        directory: "{{.USER_WORKING_DIR}}/ansible"
 
   plan:
     desc: "Plan infrastructure"
