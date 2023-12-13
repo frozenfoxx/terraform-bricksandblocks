@@ -17,6 +17,11 @@ TerraForm code for deploying BricksAndBlocks infrastructure.
 * Fill in appropriate values for `.env`
 * Make a copy of `main.auto.tfvars.example` called `main.auto.tfvars`
 * Fill in appropriate values for `main.auto.tfvars`
+* Run the setup task:
+
+```
+task setup
+```
 
 # Usage
 
