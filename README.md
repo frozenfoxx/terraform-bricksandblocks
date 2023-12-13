@@ -4,11 +4,9 @@ TerraForm code for deploying BricksAndBlocks infrastructure.
 
 # Requirements
 
-* [Terraform Cloud](https://cloud.hashicorp.com/products/terraform)
-* [Ansible](https://ansible.com)
-* [Ansible Galaxy](https://galaxy.ansible.com)
-* [git](http://git-scm.com)
 * [rclone](https://rclone.org)
+* [Terraform Cloud](https://cloud.hashicorp.com/products/terraform)
+* [Task](https://taskfile.dev)
 
 # Configuration
 
