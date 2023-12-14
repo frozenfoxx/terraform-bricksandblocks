@@ -6,13 +6,14 @@ dotenv: [".env"]
 vars:
   ANSIBLE_ARGS: ""
   ANSIBLE_CONFIG: "{{.USER_WORKING_DIR}}/ansible/ansible.cfg"
+  INVENTORY_PATH: '{{default "inventory" .INVENTORY_PATH}}'
   RCLONE_ARGS: ""
   TERRAFORM_ARGS: ""
 
 includes:
   ansible:
     taskfile: .taskfiles/ansible.tasks.yml
-    dir: ansible
+    dir: "{{.USER_WORKING_DIR}}/ansible"
     internal: true
 
   git:
@@ -49,10 +50,9 @@ tasks:
       - task: rclone:copy
         vars:
           RCLONE_SOURCE: "inventory:{{.INVENTORY_PATH}}/"
-          RCLONE_DEST: "."
+          RCLONE_DEST: "./inventory/"
         directory: "{{.USER_WORKING_DIR}}/ansible"
       - task: ansible:galaxy
-        directory: "{{.USER_WORKING_DIR}}/ansible"
 
   plan:
     desc: "Plan infrastructure"
