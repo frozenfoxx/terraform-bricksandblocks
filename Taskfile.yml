@@ -3,17 +3,18 @@ version: "3"
 
 dotenv: [".env"]
 
+env:
+  ANSIBLE_CONFIG: '{{default "{{.USER_WORKING_DIR}}/ansible/ansible.cfg" .ANSIBLE_CONFIG}}'
+
 vars:
-  ANSIBLE_ARGS: ""
-  ANSIBLE_CONFIG: "{{.USER_WORKING_DIR}}/ansible/ansible.cfg"
   INVENTORY_PATH: '{{default "inventory" .INVENTORY_PATH}}'
-  RCLONE_ARGS: ""
-  TERRAFORM_ARGS: ""
 
 includes:
   ansible:
     taskfile: .taskfiles/ansible.tasks.yml
     dir: "{{.USER_WORKING_DIR}}/ansible"
+    vars:
+      ANSIBLE_ARGS: "-u {{.ANSIBLE_USER}}"
     internal: true
 
   git:
@@ -40,18 +41,12 @@ tasks:
     desc: "Set up repository for use"
     cmds:
       - task: rclone:install
-      - task: terraform:init
       - rm -rf ./ansible
       - git clone https://github.com/frozenfoxx/ansible-bricksandblocks.git ansible
-      - task: git:reset:dir
-        vars:
-          CLI_ARGS: "./inventory"
-        directory: "{{.USER_WORKING_DIR}}/ansible"
       - task: rclone:copy
         vars:
           RCLONE_SOURCE: "inventory:{{.INVENTORY_PATH}}/"
-          RCLONE_DEST: "./inventory/"
-        directory: "{{.USER_WORKING_DIR}}/ansible"
+          RCLONE_DEST: "{{.USER_WORKING_DIR}}/ansible/inventory/"
       - task: ansible:galaxy
 
   plan:
@@ -70,6 +65,9 @@ tasks:
       - task: terraform:validate
       - task: terraform:plan
       - task: terraform:apply
+      #- task: ansible:playbook
+      #  vars:
+      #    CLI_ARGS: playbooks/site.yml
 
   destroy:
     desc: "Destroy infrastructure"
