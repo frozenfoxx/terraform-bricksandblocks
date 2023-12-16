@@ -30,7 +30,7 @@ variable "private_ssh_key" {
   sensitive   = true
 }
 
-variable "root_dir" {
+variable "repo_dir" {
   default     = "."
   type        = string
   description = "Path to the root of the directory within the filesystem"
