@@ -30,6 +30,12 @@ variable "private_ssh_key" {
   sensitive   = true
 }
 
+variable "root_dir" {
+  default     = "."
+  type        = "string"
+  description = "Path to the root of the directory within the filesystem"
+}
+
 variable "public_ssh_keys" {
   default     = ["~/.ssh/id_ed25519.pub"]
   type        = list(string)
