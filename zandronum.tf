@@ -52,21 +52,6 @@ resource "proxmox_lxc" "zandronum" {
   provisioner "remote-exec" {
     inline = ["sudo apt update", "sudo apt install python3 -y"]
   }
-
-  provisioner "local-exec" {
-    command = "${path.module}/scripts/ansible_deploy.sh"
-    environment = {
-      ANSIBLE_DIR = "ansible-zandronum"
-      ANSIBLE_REPO = var.ansible_repo
-      INVENTORY_PATH = var.ansible_inventory_path
-      RCLONE_CONFIG_INVENTORY_ACCOUNT = var.ansible_rclone_config_inventory_account
-      RCLONE_CONFIG_INVENTORY_KEY = var.ansible_rclone_config_inventory_key
-      RCLONE_CONFIG_INVENTORY_TYPE = var.ansible_rclone_config_inventory_type
-      PLAYBOOK = "zandronum.yml"
-      PRIVATE_SSH_KEY = var.private_ssh_key
-      TARGET = split("/", self.network[0].ip)[0]
-    }
-  }
 }
 
 output "zandronum_ip" {

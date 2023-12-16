@@ -1,7 +1,3 @@
-ansible_inventory_path = "bucket/inventory/path"
-ansible_rclone_config_inventory_type = "someRcloneType"
-ansible_rclone_config_inventory_account = "account"
-ansible_rclone_config_inventory_key = "key"
 pm_api_url = "https://proxmox:8006/api2/json"
 pm_user = "terraform-prov@pve"
 pm_pass = "big-secret-pass"
