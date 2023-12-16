@@ -22,7 +22,7 @@ resource "proxmox_vm_qemu" "mealie" {
   sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
-    type     = "scsi"
+    type = "scsi"
     #FIXME Required due to this error: https://github.com/Telmate/terraform-provider-proxmox/issues/460
     iothread = 0
     storage  = "pool"
