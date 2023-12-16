@@ -4,26 +4,26 @@ resource "random_password" "serge_password" {
 }
 
 resource "proxmox_vm_qemu" "serge" {
-  os_type      = "cloud-init"
-  count        = 0
-  clone        = var.template
-  name         = "serge"
-  target_node  = var.target_node
-  onboot       = true
-  agent        = 0
-  qemu_os      = "other"
-  tags         = "serge"
+  os_type     = "cloud-init"
+  count       = 0
+  clone       = var.template
+  name        = "serge"
+  target_node = var.target_node
+  onboot      = true
+  agent       = 0
+  qemu_os     = "other"
+  tags        = "serge"
 
-  cores        = 8
-  memory       = 32768
-  bios         = "seabios"
-  scsihw       = "virtio-scsi-pci"
-  hotplug      = "network,disk,usb"
-  ipconfig0    = "ip=192.168.2.38/24,gw=192.168.2.1"
-  sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
+  cores     = 8
+  memory    = 32768
+  bios      = "seabios"
+  scsihw    = "virtio-scsi-pci"
+  hotplug   = "network,disk,usb"
+  ipconfig0 = "ip=192.168.2.38/24,gw=192.168.2.1"
+  sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
-    type     = "scsi"
+    type = "scsi"
     #FIXME Required due to this error: https://github.com/Telmate/terraform-provider-proxmox/issues/460
     iothread = 0
     storage  = "pool"

@@ -15,8 +15,8 @@ resource "proxmox_lxc" "revproxy" {
   unprivileged    = true
   tags            = "revproxy"
 
-  cores           = 2
-  memory          = 2048
+  cores  = 2
+  memory = 2048
 
   rootfs {
     storage = "pool"

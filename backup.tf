@@ -14,9 +14,9 @@ resource "proxmox_lxc" "backup" {
   start           = true
   unprivileged    = true
 
-  cores           = 2
-  memory          = 2048
-  swap            = 1024
+  cores  = 2
+  memory = 2048
+  swap   = 1024
 
   rootfs {
     storage = "pool"

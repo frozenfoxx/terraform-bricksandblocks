@@ -15,9 +15,9 @@ resource "proxmox_lxc" "zandronum" {
   unprivileged    = true
   tags            = "zandronum"
 
-  cores           = 2
-  memory          = 1024
-  swap            = 1024
+  cores  = 2
+  memory = 1024
+  swap   = 1024
 
   rootfs {
     storage = "pool"

@@ -15,8 +15,8 @@ resource "proxmox_lxc" "barotrauma" {
   unprivileged    = true
   tags            = "barotrauma"
 
-  cores           = 2
-  memory          = 2048
+  cores  = 2
+  memory = 2048
 
   rootfs {
     storage = "pool"

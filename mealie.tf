@@ -4,22 +4,22 @@ resource "random_password" "mealie_password" {
 }
 
 resource "proxmox_vm_qemu" "mealie" {
-  os_type      = "cloud-init"
-  count        = 1
-  clone        = var.template
-  name         = "mealie"
-  target_node  = var.target_node
-  onboot       = true
-  agent        = 0
-  qemu_os      = "other"
-  tags         = "mealie"
+  os_type     = "cloud-init"
+  count       = 1
+  clone       = var.template
+  name        = "mealie"
+  target_node = var.target_node
+  onboot      = true
+  agent       = 0
+  qemu_os     = "other"
+  tags        = "mealie"
 
-  cores        = 2
-  memory       = 4096
-  bios         = "seabios"
-  scsihw       = "virtio-scsi-pci"
-  ipconfig0    = "ip=192.168.2.23/24,gw=192.168.2.1"
-  sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
+  cores       = 2
+  memory      = 4096
+  bios        = "seabios"
+  scsihw      = "virtio-scsi-pci"
+  ipconfig0   = "ip=192.168.2.23/24,gw=192.168.2.1"
+  sshkeys     = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
     type     = "scsi"

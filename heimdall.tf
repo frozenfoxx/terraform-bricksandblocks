@@ -4,25 +4,25 @@ resource "random_password" "heimdall_password" {
 }
 
 resource "proxmox_vm_qemu" "heimdall" {
-  os_type      = "cloud-init"
-  count        = 1
-  clone        = var.template
-  name         = "heimdall"
-  target_node  = var.target_node
-  onboot       = true
-  agent        = 0
-  qemu_os      = "other"
-  tags         = "heimdall"
+  os_type     = "cloud-init"
+  count       = 1
+  clone       = var.template
+  name        = "heimdall"
+  target_node = var.target_node
+  onboot      = true
+  agent       = 0
+  qemu_os     = "other"
+  tags        = "heimdall"
 
-  cores        = 2
-  memory       = 4096
-  bios         = "seabios"
-  scsihw       = "virtio-scsi-pci"
-  ipconfig0    = "ip=192.168.2.26/24,gw=192.168.2.1"
-  sshkeys      = join("", [for key in var.public_ssh_keys : file(key)])
+  cores       = 2
+  memory      = 4096
+  bios        = "seabios"
+  scsihw      = "virtio-scsi-pci"
+  ipconfig0   = "ip=192.168.2.26/24,gw=192.168.2.1"
+  sshkeys     = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
-    type     = "scsi"
+    type = "scsi"
     #FIXME Required due to this error: https://github.com/Telmate/terraform-provider-proxmox/issues/460
     iothread = 0
     storage  = "pool"
