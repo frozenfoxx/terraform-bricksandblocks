@@ -77,3 +77,8 @@ tasks:
       - task: terraform:validate
       - task: terraform:plan
       - task: terraform:destroy
+
+  update:
+    desc: "Update taskfiles"
+    cmds:
+      - task: git:submodule:update
