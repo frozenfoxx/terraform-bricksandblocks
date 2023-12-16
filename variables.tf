@@ -32,7 +32,7 @@ variable "private_ssh_key" {
 
 variable "root_dir" {
   default     = "."
-  type        = "string"
+  type        = string
   description = "Path to the root of the directory within the filesystem"
 }
 
