@@ -11,18 +11,17 @@ TerraForm code for deploying BricksAndBlocks infrastructure.
 
 # Configuration
 
+* Make a copy of `env.dist` called `.env`
+* Fill in appropriate values for `.env`
+* Make a copy of `main.auto.tfvars.example` called `main.auto.tfvars`
+* Fill in appropriate values for `main.auto.tfvars`
+* Log into Terraform Cloud with `terraform login`
 * Add submodule for taskfiles and run setup task
 
 ```
 git submodule add https://github.com/frozenfoxx/taskfiles.git .taskfiles
 task setup
 ```
-
-* Log into Terraform Cloud with `terraform login`
-* Make a copy of `env.dist` called `.env`
-* Fill in appropriate values for `.env`
-* Make a copy of `main.auto.tfvars.example` called `main.auto.tfvars`
-* Fill in appropriate values for `main.auto.tfvars`
 
 # Usage
 
