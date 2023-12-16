@@ -24,12 +24,12 @@ resource "proxmox_vm_qemu" "cluster-1" {
   qemu_os     = "other"
   tags        = "rke2_scheduler"
 
-  cores       = 4
-  memory      = 4096
-  bios        = "seabios"
-  scsihw      = "virtio-scsi-pci"
-  ipconfig0   = "ip=192.168.2.40/24,gw=192.168.2.1"
-  sshkeys     = join("", [for key in var.public_ssh_keys : file(key)])
+  cores     = 4
+  memory    = 4096
+  bios      = "seabios"
+  scsihw    = "virtio-scsi-pci"
+  ipconfig0 = "ip=192.168.2.40/24,gw=192.168.2.1"
+  sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
     type = "scsi"
@@ -69,13 +69,13 @@ resource "proxmox_vm_qemu" "cluster-2" {
   qemu_os     = "other"
   tags        = "rke2_worker"
 
-  cores       = 4
-  memory      = 4096
-  bios        = "seabios"
-  scsihw      = "virtio-scsi-pci"
-  hotplug     = "network,disk,usb"
-  ipconfig0   = "ip=192.168.2.41/24,gw=192.168.2.1"
-  sshkeys     = join("", [for key in var.public_ssh_keys : file(key)])
+  cores     = 4
+  memory    = 4096
+  bios      = "seabios"
+  scsihw    = "virtio-scsi-pci"
+  hotplug   = "network,disk,usb"
+  ipconfig0 = "ip=192.168.2.41/24,gw=192.168.2.1"
+  sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
     type = "scsi"
@@ -115,13 +115,13 @@ resource "proxmox_vm_qemu" "cluster-3" {
   qemu_os     = "other"
   tags        = "rke2_worker"
 
-  cores       = 4
-  memory      = 4096
-  bios        = "seabios"
-  scsihw      = "virtio-scsi-pci"
-  hotplug     = "network,disk,usb"
-  ipconfig0   = "ip=192.168.2.42/24,gw=192.168.2.1"
-  sshkeys     = join("", [for key in var.public_ssh_keys : file(key)])
+  cores     = 4
+  memory    = 4096
+  bios      = "seabios"
+  scsihw    = "virtio-scsi-pci"
+  hotplug   = "network,disk,usb"
+  ipconfig0 = "ip=192.168.2.42/24,gw=192.168.2.1"
+  sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
     type = "scsi"

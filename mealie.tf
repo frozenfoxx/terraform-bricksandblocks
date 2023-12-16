@@ -14,12 +14,12 @@ resource "proxmox_vm_qemu" "mealie" {
   qemu_os     = "other"
   tags        = "mealie"
 
-  cores       = 2
-  memory      = 4096
-  bios        = "seabios"
-  scsihw      = "virtio-scsi-pci"
-  ipconfig0   = "ip=192.168.2.23/24,gw=192.168.2.1"
-  sshkeys     = join("", [for key in var.public_ssh_keys : file(key)])
+  cores     = 2
+  memory    = 4096
+  bios      = "seabios"
+  scsihw    = "virtio-scsi-pci"
+  ipconfig0 = "ip=192.168.2.23/24,gw=192.168.2.1"
+  sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
     type     = "scsi"

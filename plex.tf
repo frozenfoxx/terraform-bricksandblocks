@@ -15,9 +15,9 @@ resource "proxmox_lxc" "plex" {
   unprivileged    = true
   tags            = "plex"
 
-  cores           = 4
-  memory          = 2048
-  swap            = 1024
+  cores  = 4
+  memory = 2048
+  swap   = 1024
 
   rootfs {
     storage = "pool"

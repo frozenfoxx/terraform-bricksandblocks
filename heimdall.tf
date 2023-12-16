@@ -14,12 +14,12 @@ resource "proxmox_vm_qemu" "heimdall" {
   qemu_os     = "other"
   tags        = "heimdall"
 
-  cores       = 2
-  memory      = 4096
-  bios        = "seabios"
-  scsihw      = "virtio-scsi-pci"
-  ipconfig0   = "ip=192.168.2.26/24,gw=192.168.2.1"
-  sshkeys     = join("", [for key in var.public_ssh_keys : file(key)])
+  cores     = 2
+  memory    = 4096
+  bios      = "seabios"
+  scsihw    = "virtio-scsi-pci"
+  ipconfig0 = "ip=192.168.2.26/24,gw=192.168.2.1"
+  sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
   disk {
     type = "scsi"
