@@ -12,7 +12,7 @@ vars:
 includes:
   ansible:
     taskfile: .taskfiles/ansible.tasks.yml
-    dir: "{{.USER_WORKING_DIR}}/ansible"
+    dir: "{{.ROOT_DIR}}/ansible"
     vars:
       ANSIBLE_ARGS: "-u {{.ANSIBLE_USER}}"
     internal: true
@@ -28,7 +28,7 @@ includes:
   terraform:
     taskfile: .taskfiles/terraform.tasks.yml
     vars:
-      TERRAFORM_ARGS: -var="repo_dir={{.USER_WORKING_DIR}}"
+      TERRAFORM_ARGS: -var="repo_dir={{.ROOT_DIR}}"
     internal: true
 
 tasks:
@@ -41,12 +41,12 @@ tasks:
     desc: "Set up repository for use"
     cmds:
       - task: rclone:install
-      - rm -rf {{.USER_WORKING_DIR}}/ansible
+      - rm -rf {{.ROOT_DIR}}/ansible
       - git clone https://github.com/frozenfoxx/ansible-bricksandblocks.git ansible
       - task: rclone:copy
         vars:
           RCLONE_SOURCE: "inventory:{{.INVENTORY_PATH}}/"
-          RCLONE_DEST: "{{.USER_WORKING_DIR}}/ansible/inventory/"
+          RCLONE_DEST: "{{.ROOT_DIR}}/ansible/inventory/"
       - task: ansible:galaxy
 
   plan:
