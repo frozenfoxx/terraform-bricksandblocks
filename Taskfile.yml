@@ -41,7 +41,7 @@ tasks:
     desc: "Set up repository for use"
     cmds:
       - task: rclone:install
-      - rm -rf ./ansible
+      - rm -rf {{.USER_WORKING_DIR}}/ansible
       - git clone https://github.com/frozenfoxx/ansible-bricksandblocks.git ansible
       - task: rclone:copy
         vars:
