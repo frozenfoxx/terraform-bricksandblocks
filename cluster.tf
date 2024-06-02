@@ -24,8 +24,8 @@ resource "proxmox_vm_qemu" "cluster-1" {
   qemu_os     = "other"
   tags        = "rke2_scheduler"
 
-  cores     = 4
-  memory    = 8192
+  cores     = 2
+  memory    = 2048
   bios      = "seabios"
   scsihw    = "virtio-scsi-pci"
   ipconfig0 = "ip=192.168.2.40/24,gw=192.168.2.1"
@@ -69,8 +69,8 @@ resource "proxmox_vm_qemu" "cluster-2" {
   qemu_os     = "other"
   tags        = "rke2_worker"
 
-  cores     = 4
-  memory    = 8192
+  cores     = 2
+  memory    = 2048
   bios      = "seabios"
   scsihw    = "virtio-scsi-pci"
   hotplug   = "network,disk,usb"
@@ -106,7 +106,7 @@ resource "proxmox_vm_qemu" "cluster-3" {
   depends_on = [proxmox_vm_qemu.cluster-1]
 
   os_type     = "cloud-init"
-  count       = 1
+  count       = 0
   clone       = var.template
   name        = "cluster-3"
   target_node = var.target_node
@@ -115,8 +115,8 @@ resource "proxmox_vm_qemu" "cluster-3" {
   qemu_os     = "other"
   tags        = "rke2_worker"
 
-  cores     = 4
-  memory    = 8192
+  cores     = 2
+  memory    = 2048
   bios      = "seabios"
   scsihw    = "virtio-scsi-pci"
   hotplug   = "network,disk,usb"
