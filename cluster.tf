@@ -15,7 +15,7 @@ resource "random_password" "cluster-3_password" {
 
 resource "proxmox_vm_qemu" "cluster-1" {
   os_type     = "cloud-init"
-  count       = 1
+  count       = 0
   clone       = var.template
   name        = "cluster-1"
   target_node = var.target_node
@@ -60,7 +60,7 @@ resource "proxmox_vm_qemu" "cluster-2" {
   depends_on = [proxmox_vm_qemu.cluster-1]
 
   os_type     = "cloud-init"
-  count       = 1
+  count       = 0
   clone       = var.template
   name        = "cluster-2"
   target_node = var.target_node
