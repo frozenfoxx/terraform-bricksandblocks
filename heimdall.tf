@@ -6,7 +6,7 @@ resource "random_password" "heimdall_password" {
 resource "proxmox_vm_qemu" "heimdall" {
   os_type     = "cloud-init"
   count       = 1
-  clone       = var.template
+  clone       = "ubuntu-2304"
   name        = "heimdall"
   target_node = var.target_node
   onboot      = true

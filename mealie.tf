@@ -6,7 +6,7 @@ resource "random_password" "mealie_password" {
 resource "proxmox_vm_qemu" "mealie" {
   os_type     = "cloud-init"
   count       = 1
-  clone       = var.template
+  clone       = "ubuntu-2304"
   name        = "mealie"
   target_node = var.target_node
   onboot      = true
