@@ -5,7 +5,7 @@ resource "random_password" "docker-1_password" {
 
 resource "proxmox_vm_qemu" "docker-1" {
   os_type     = "cloud-init"
-  count       = 0
+  count       = 1
   clone       = var.template
   name        = "docker-1"
   target_node = var.target_node
@@ -15,7 +15,7 @@ resource "proxmox_vm_qemu" "docker-1" {
   tags        = "docker"
 
   cores     = 4
-  memory    = 4096
+  memory    = 8192
   bios      = "seabios"
   scsihw    = "virtio-scsi-pci"
   ipconfig0 = "ip=192.168.2.24/24,gw=192.168.2.1"
