@@ -32,8 +32,8 @@ resource "proxmox_vm_qemu" "docker-1" {
   mountpoint {
     key     = "0"
     slot    = 0
-    storage = "/srv/docker"
-    volume  = "/srv/docker"
+    storage = "/srv/Docker"
+    volume  = "/srv/Docker"
     mp      = "/data"
     size    = "0T"
   }
