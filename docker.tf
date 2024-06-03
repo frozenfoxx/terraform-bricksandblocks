@@ -29,15 +29,6 @@ resource "proxmox_vm_qemu" "docker-1" {
     size     = "20G"
   }
 
-  mountpoint {
-    key     = "0"
-    slot    = 0
-    storage = "/srv/Docker"
-    volume  = "/srv/Docker"
-    mp      = "/data"
-    size    = "0T"
-  }
-
   network {
     model  = "virtio"
     bridge = "vmbr0"
