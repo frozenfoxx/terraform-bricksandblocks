@@ -22,12 +22,20 @@ resource "proxmox_vm_qemu" "serge" {
   ipconfig0 = "ip=192.168.2.38/24,gw=192.168.2.1"
   sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
-  disk {
-    type = "scsi"
-    #FIXME Required due to this error: https://github.com/Telmate/terraform-provider-proxmox/issues/460
-    iothread = 0
-    storage  = "pool"
-    size     = "50G"
+  disks {
+    scsi {
+      scsi1 {
+        cloudinit {
+          storage = "pool"
+        }
+      }
+      scsi2 {
+        #FIXME Required due to this error: https://github.com/Telmate/terraform-provider-proxmox/issues/460
+        iothread = 0
+        storage  = "pool"
+        size     = "50G"
+      }
+    }
   }
 
   network {
