@@ -39,8 +39,10 @@ resource "proxmox_vm_qemu" "cluster-1" {
         }
       }
       scsi2 {
-        storage  = "pool"
-        size     = "20G"
+        disk {
+          storage  = "pool"
+          size     = "20G"
+        }
       }
     }
   }
