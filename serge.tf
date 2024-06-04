@@ -30,8 +30,10 @@ resource "proxmox_vm_qemu" "serge" {
         }
       }
       scsi2 {
-        storage  = "pool"
-        size     = "50G"
+        disk {
+          storage  = "pool"
+          size     = "50G"
+        }
       }
     }
   }
