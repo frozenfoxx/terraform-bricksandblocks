@@ -29,8 +29,6 @@ resource "proxmox_vm_qemu" "docker-1" {
         }
       }
       scsi2 {
-        #FIXME Required due to this error: https://github.com/Telmate/terraform-provider-proxmox/issues/460
-        iothread = 0
         storage  = "pool"
         size     = "20G"
       }
