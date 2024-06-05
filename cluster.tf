@@ -150,6 +150,7 @@ resource "proxmox_vm_qemu" "cluster-3" {
           storage = "pool"
         }
       }
+    }
     scsi {
       scsi0 {
         disk {
