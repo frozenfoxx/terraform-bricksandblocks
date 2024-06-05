@@ -32,16 +32,18 @@ resource "proxmox_vm_qemu" "cluster-1" {
   sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
   disks {
-    scsi {
-      scsi1 {
+    ide {
+      ide2 {
         cloudinit {
           storage = "pool"
         }
       }
-      scsi2 {
+    }
+    scsi {
+      scsi0 {
         disk {
-          storage  = "pool"
-          size     = "20G"
+          storage = "pool"
+          size    = "20G"
         }
       }
     }
@@ -86,16 +88,18 @@ resource "proxmox_vm_qemu" "cluster-2" {
   sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
   disks {
-    scsi {
-      scsi1 {
+    ide {
+      ide2 {
         cloudinit {
           storage = "pool"
         }
       }
-      scsi2 {
+    }
+    scsi {
+      scsi0 {
         disk {
-          storage  = "pool"
-          size     = "20G"
+          storage = "pool"
+          size    = "20G"
         }
       }
     }
@@ -140,16 +144,17 @@ resource "proxmox_vm_qemu" "cluster-3" {
   sshkeys   = join("", [for key in var.public_ssh_keys : file(key)])
 
   disks {
-    scsi {
-      scsi1 {
+    ide {
+      ide2 {
         cloudinit {
           storage = "pool"
         }
       }
-      scsi2 {
+    scsi {
+      scsi0 {
         disk {
-          storage  = "pool"
-          size     = "20G"
+          storage = "pool"
+          size    = "20G"
         }
       }
     }
