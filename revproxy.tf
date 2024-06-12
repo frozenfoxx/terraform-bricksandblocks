@@ -4,7 +4,7 @@ resource "random_password" "revproxy_password" {
 }
 
 resource "proxmox_lxc" "revproxy" {
-  count           = 1
+  count           = 0
   target_node     = var.target_node
   hostname        = "revproxy"
   onboot          = true
