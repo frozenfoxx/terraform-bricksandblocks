@@ -4,7 +4,7 @@ resource "random_password" "jellyfin_password" {
 }
 
 resource "proxmox_lxc" "jellyfin" {
-  count           = 1
+  count           = 0
   target_node     = var.target_node
   hostname        = "jellyfin"
   onboot          = true
