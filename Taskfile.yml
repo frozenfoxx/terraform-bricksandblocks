@@ -11,22 +11,22 @@ vars:
 
 includes:
   ansible:
-    taskfile: .taskfiles/ansible.tasks.yml
+    taskfile: taskfiles/ansible.tasks.yml
     dir: "{{.ROOT_DIR}}/ansible"
     vars:
       ANSIBLE_ARGS: "-u {{.ANSIBLE_USER}}"
     internal: true
 
   git:
-    taskfile:  .taskfiles/git.tasks.yml
+    taskfile: taskfiles/git.tasks.yml
     internal: true
 
   rclone:
-    taskfile: .taskfiles/rclone.tasks.yml
+    taskfile: taskfiles/rclone.tasks.yml
     internal: true
 
   terraform:
-    taskfile: .taskfiles/terraform.tasks.yml
+    taskfile: taskfiles/terraform.tasks.yml
     vars:
       TERRAFORM_ARGS: -var="repo_dir={{.ROOT_DIR}}"
     internal: true
@@ -79,6 +79,8 @@ tasks:
       - task: terraform:destroy
 
   update:
-    desc: "Update taskfiles"
+    desc: "Update repo"
     cmds:
-      - task: git:submodule:update
+      - rm -rf taskfiles
+      - git clone git@github.com:frozenfoxx/taskfiles.git taskfiles
+      - git pull --rebase
