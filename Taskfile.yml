@@ -15,20 +15,24 @@ includes:
     dir: "{{.ROOT_DIR}}/ansible"
     vars:
       ANSIBLE_ARGS: "-u {{.ANSIBLE_USER}}"
+    optional: true
     internal: true
 
   git:
     taskfile: taskfiles/git.tasks.yml
+    optional: true
     internal: true
 
   rclone:
     taskfile: taskfiles/rclone.tasks.yml
+    optional: true
     internal: true
 
   terraform:
     taskfile: taskfiles/terraform.tasks.yml
     vars:
       TERRAFORM_ARGS: -var="repo_dir={{.ROOT_DIR}}"
+    optional: true
     internal: true
 
 tasks:
