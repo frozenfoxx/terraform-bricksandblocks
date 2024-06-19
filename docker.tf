@@ -61,7 +61,7 @@ resource "proxmox_vm_qemu" "docker-1" {
   }
 }
 
-resource "proxmox_vm_qemu" "docker-1" {
+resource "proxmox_vm_qemu" "docker-2" {
   os_type     = "cloud-init"
   count       = 1
   clone       = var.template
