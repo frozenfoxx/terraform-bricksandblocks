@@ -32,5 +32,8 @@ override.tf.json
 # Ignore the cloned ansible directory
 ansible
 
+# Ignore configuration env files
+.env
+
 # MacOS
 .DS_Store
