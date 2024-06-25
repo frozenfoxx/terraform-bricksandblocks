@@ -3,25 +3,7 @@ version: "3"
 
 dotenv: [".env"]
 
-env:
-  ANSIBLE_CONFIG: '{{default "{{.USER_WORKING_DIR}}/ansible/ansible.cfg" .ANSIBLE_CONFIG}}'
-
-vars:
-  INVENTORY_PATH: '{{default "inventory" .INVENTORY_PATH}}'
-
 includes:
-  ansible:
-    taskfile: taskfiles/ansible.tasks.yml
-    dir: "{{.ROOT_DIR}}/ansible"
-    vars:
-      ANSIBLE_ARGS: "-u {{.ANSIBLE_USER}}"
-    optional: true
-    internal: true
-
-  git:
-    taskfile: taskfiles/git.tasks.yml
-    optional: true
-    internal: true
 
   rclone:
     taskfile: taskfiles/rclone.tasks.yml
@@ -45,13 +27,6 @@ tasks:
     desc: "Set up repository for use"
     cmds:
       - task: rclone:install
-      - rm -rf {{.ROOT_DIR}}/ansible
-      - git clone https://github.com/frozenfoxx/ansible-bricksandblocks.git ansible
-      - task: rclone:copy
-        vars:
-          RCLONE_SOURCE: "inventory:{{.INVENTORY_PATH}}/"
-          RCLONE_DEST: "{{.ROOT_DIR}}/ansible/inventory/"
-      - task: ansible:galaxy
 
   plan:
     desc: "Plan infrastructure"
@@ -69,9 +44,6 @@ tasks:
       - task: terraform:validate
       - task: terraform:plan
       - task: terraform:apply
-      #- task: ansible:playbook
-      #  vars:
-      #    CLI_ARGS: playbooks/site.yml
 
   destroy:
     desc: "Destroy infrastructure"

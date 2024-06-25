@@ -19,7 +19,6 @@ TerraForm code for deploying BricksAndBlocks infrastructure.
 * Add submodule for taskfiles and run setup task
 
 ```
-git submodule update --init --remote --recursive
 task setup
 ```
 
