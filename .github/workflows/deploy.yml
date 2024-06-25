@@ -100,11 +100,3 @@ jobs:
         run: terraform apply -auto-approve
         env:
           TF_LOG: ${{ inputs.terraformLogLevel }}
-          TF_VAR_ansible_repo: ${{ vars.ANSIBLE_REPO }}
-          TF_VAR_ansible_inventory_path: ${{ vars.ANSIBLE_INVENTORY_PATH }}
-          TF_VAR_ansible_rclone_config_inventory_access_key_id: ${{ secrets.ANSIBLE_RCLONE_CONFIG_INVENTORY_ACCESS_KEY_ID }}
-          TF_VAR_ansible_rclone_config_inventory_endpoint: ${{ secrets.ANSIBLE_RCLONE_CONFIG_INVENTORY_ENDPOINT }}
-          TF_VAR_ansible_rclone_config_inventory_env_auth: ${{ secrets.ANSIBLE_RCLONE_CONFIG_INVENTORY_ENV_AUTH }}
-          TF_VAR_ansible_rclone_config_inventory_provider: ${{ secrets.ANSIBLE_RCLONE_CONFIG_INVENTORY_PROVIDER }}
-          TF_VAR_ansible_rclone_config_inventory_secret_access_key: ${{ secrets.ANSIBLE_RCLONE_CONFIG_INVENTORY_SECRET_ACCESS_KEY }}
-          TF_VAR_ansible_rclone_config_inventory_type: ${{ secrets.ANSIBLE_RCLONE_CONFIG_INVENTORY_TYPE }}
