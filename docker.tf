@@ -38,7 +38,7 @@ resource "proxmox_vm_qemu" "docker-1" {
       scsi0 {
         disk {
           storage = "pool"
-          size    = "20G"
+          size    = "100G"
         }
       }
     }
