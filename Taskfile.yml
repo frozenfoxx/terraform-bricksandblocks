@@ -6,12 +6,12 @@ dotenv: [".env"]
 includes:
 
   rclone:
-    taskfile: taskfiles/rclone.tasks.yml
+    taskfile: .taskfiles/rclone.tasks.yml
     optional: true
     internal: true
 
   terraform:
-    taskfile: taskfiles/terraform.tasks.yml
+    taskfile: .taskfiles/terraform.tasks.yml
     vars:
       TERRAFORM_ARGS: -var="repo_dir={{.ROOT_DIR}}"
     optional: true
@@ -57,6 +57,6 @@ tasks:
   update:
     desc: "Update repo"
     cmds:
-      - rm -rf taskfiles
-      - git clone git@github.com:frozenfoxx/taskfiles.git taskfiles
+      - rm -rf .taskfiles
+      - git clone git@github.com:frozenfoxx/taskfiles.git .taskfiles
       - git pull --rebase

@@ -35,5 +35,8 @@ ansible
 # Ignore configuration env files
 .env
 
+# Ignore taskfiles
+.taskfiles
+
 # MacOS
 .DS_Store
