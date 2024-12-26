@@ -27,10 +27,10 @@ resource "proxmox_vm_qemu" "cluster" {
     scsi {
       scsi0 {
         disk {
-          asyncio = "threads"
+          asyncio  = "threads"
           iothread = true
-          storage = "pool"
-          size    = "20G"
+          storage  = "pool"
+          size     = "20G"
         }
       }
     }

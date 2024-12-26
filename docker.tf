@@ -27,10 +27,10 @@ resource "proxmox_vm_qemu" "docker" {
     scsi {
       scsi0 {
         disk {
-          asyncio = "threads"
+          asyncio  = "threads"
           iothread = true
-          storage = "pool"
-          size    = "100G"
+          storage  = "pool"
+          size     = "100G"
         }
       }
     }
