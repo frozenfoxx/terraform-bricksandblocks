@@ -57,7 +57,7 @@ resource "proxmox_vm_qemu" "docker-host-2" {
   os_type     = "cloud-init"
   count       = 1
   clone       = var.template
-  name        = "docker-${count.index + 3}"
+  name        = "docker-${count.index + 4}"
   target_node = "host-2"
   onboot      = true
   agent       = 0
