@@ -20,7 +20,7 @@ resource "proxmox_vm_qemu" "docker-host-1" {
     ide {
       ide2 {
         cloudinit {
-          storage = "pool"
+          storage = "images"
         }
       }
     }
@@ -29,7 +29,7 @@ resource "proxmox_vm_qemu" "docker-host-1" {
         disk {
           asyncio  = "threads"
           iothread = true
-          storage  = "pool"
+          storage  = "images"
           size     = "100G"
         }
       }
