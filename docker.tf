@@ -30,7 +30,7 @@ resource "proxmox_vm_qemu" "docker-host-1" {
           asyncio  = "threads"
           iothread = true
           storage  = "images"
-          size     = "100G"
+          size     = "50G"
         }
       }
     }
