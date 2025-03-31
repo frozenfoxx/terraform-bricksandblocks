@@ -84,7 +84,7 @@ resource "proxmox_vm_qemu" "docker-host-2" {
         disk {
           asyncio  = "threads"
           iothread = true
-          storage  = "images"
+          storage  = "local-lvm"
           size     = "100G"
         }
       }
